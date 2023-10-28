@@ -1,4 +1,12 @@
 class CustomerFaves {
-  late final int customerId;
+  final int customerId;
+  final int parkingSpot;
+
+  CustomerFaves({
+    required this.customerId,
+    required this.parkingSpot,
+
+
+  });
 
 }
