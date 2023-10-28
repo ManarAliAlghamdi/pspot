@@ -15,6 +15,7 @@ class FloorControl extends StatefulWidget {
 }
 
 class _FloorControl  extends State<FloorControl> {
+  // floor info is not null?
   FloorModel? floorInfo;
   late AnimationController controller;
   @override

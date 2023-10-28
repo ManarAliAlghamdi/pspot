@@ -241,13 +241,11 @@ class _BookYourSpotState extends State<BookYourSpot> {
                             child: filteredLocationFloors.length == 0
                                 ? Text('No Data')
                                 : Container(
-                              height: MediaQuery.of(context).size.height -
-                                  300,
-                              width:
-                              MediaQuery.of(context).size.width - 50,
-                              child: RefreshIndicator(
-                                  onRefresh: _refreshLocationFloors,
-                                  child: ListView.builder(
+                                   height: MediaQuery.of(context).size.height - 300,
+                                   width: MediaQuery.of(context).size.width - 50,
+                                 child: RefreshIndicator(
+                                    onRefresh: _refreshLocationFloors,
+                                     child: ListView.builder(
                                       itemCount:
                                       filteredLocationFloors.length,
                                       itemBuilder: (BuildContext context,
@@ -260,32 +258,18 @@ class _BookYourSpotState extends State<BookYourSpot> {
                                               showLocations = false;
                                               showProcessing = true;
                                             });
-                                            currentFlor =
-                                                filteredLocationFloors[
-                                                index]
-                                                    .floorDescription;
+                                            currentFlor = filteredLocationFloors[index].floorDescription;
                                             filteredFloorSections = [];
                                             await getFloorSections(
-                                                filteredLocationFloors[
-                                                index]
-                                                    .floorId)
-                                                .then((sections) async {
-                                              filteredFloorSections =
-                                                  sections;
-                                              parkingSpots = [];
-                                              for (int i = 0;
-                                              i <
-                                                  filteredFloorSections
-                                                      .length;
-                                              i++) {
+                                                filteredLocationFloors[index].floorId).then((sections) async {
+                                                  filteredFloorSections = sections;
+                                                  parkingSpots = [];
+                                              for (int i = 0; i < filteredFloorSections.length; i++) {
                                                 await getSectionParkingSpots(
-                                                    filteredFloorSections[
-                                                    i]
-                                                        .sectionId)
-                                                    .then((value) {
-                                                  setState(() {
-                                                    parkingSpots
-                                                        .addAll(value);
+                                                    filteredFloorSections[i].sectionId).then((value) {
+                                                      setState(() {
+                                                    parkingSpots.addAll(value);
+
                                                   });
                                                 });
                                               }
@@ -301,8 +285,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
                                             children: [
                                               FloorControl(
                                                 floorInfo:
-                                                filteredLocationFloors[
-                                                index],
+                                                filteredLocationFloors[index],
                                               ),
                                             ],
                                           ),
