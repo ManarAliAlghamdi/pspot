@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pspot_test/models/customer_tickets_model.dart';
 import 'locations_model.dart';
 
 
@@ -50,6 +51,79 @@ Future<List<LocationModel>> getLocations() async {
   }
 }
 
+Future<List<CustomerTicketDetails>> gtCustomerTicketDetails(int customerNo, int invoiceNo) async {
+  List<CustomerTicketDetails> ticketsDetailsList = [];
+  try {
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerTicketDetails&conncectionStringInWebConfig=pSpotconnection";
+    List userData = [];
+    Uri finalUri = Uri.parse(uri);
+    await http.post(finalUri, body: {
+      'P1': '@customerNo',
+      'PV1': customerNo.toString(),
+
+      'P2': '@invoiceNo',
+      'PV2': invoiceNo.toString(),
+    }).then((value) async {
+      userData = jsonDecode(value.body);
+      if (userData.isNotEmpty) {
+        for (int i = 0; i < userData.length; i++) {
+          ticketsDetailsList.add(
+              CustomerTicketDetails(
+                  locationLogo: 'assets/images/${userData[i]["R1"]}',
+                  locationName: userData[i]["R2"],
+                  invoiceId: int.parse(userData[i]["R3"]),
+                  parkingSpotNumber: userData[i]["R4"],
+                  parkingSectionDescription: userData[i]["R5"],
+                  parkingFloorDescriptions: userData[i]["R6"],
+                  invoiceDateTime: DateTime.parse(userData[i]["R7"]),
+                  ticketPeriod: double.parse(userData[i]["R8"]),
+                  parkingSpotCostPerHour: double.parse(userData[i]["R9"]),
+                  subTotal: double.parse(userData[i]["R10"]),
+                  taxAmount: double.parse(userData[i]["R11"]),
+                  totalCost: double.parse(userData[i]["R12"]),
+                  invoicePaymentStatus: userData[i]["R13"],
+                  customerNo: customerNo,
+                  invoiceNo: invoiceNo)
+          );
+        }
+      }
+    });
+    return ticketsDetailsList;
+  }
+  catch (ex) {
+    return ticketsDetailsList;
+  }
+}
+
+Future<List<CustomerTickets>> getCustomerTickets(int customerNo)async{
+  List<CustomerTickets> ticketsList = [];
+  try{
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerTickets&conncectionStringInWebConfig=pSpotconnection";
+    List userData = [];
+    Uri finalUri = Uri.parse(uri);
+    await http.post(finalUri, body: {
+      'P1': '@customerId',
+      'PV1': customerNo.toString(),
+    }).then((value)async {
+      userData = jsonDecode(value.body);
+      if (userData.isNotEmpty) {
+        for (int i = 0; i < userData.length; i++) {
+          ticketsList.add(
+              CustomerTickets(
+                  locationLogo: 'assets/images/${userData[i]["R1"]}',
+                  locationName: userData[i]["R2"],
+                  parkingSpotNumber: userData[i]["R3"],
+                  ticketDateTime: DateTime.parse(userData[i]["R4"]),
+                  customerNo: customerNo
+              ));
+        }
+      }
+    });
+    return ticketsList;
+  }catch(ex){
+    return ticketsList;
+  }
+}
 
 Future<List<FloorModel>> getLocationFloors(int locationNo)
 async {
