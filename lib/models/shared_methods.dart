@@ -94,7 +94,6 @@ Future<List<CustomerTicketDetails>> gtCustomerTicketDetails(int customerNo, int 
     return ticketsDetailsList;
   }
 }
-
 Future<List<CustomerTickets>> getCustomerTickets(int customerNo)async{
   List<CustomerTickets> ticketsList = [];
   try{
@@ -113,7 +112,7 @@ Future<List<CustomerTickets>> getCustomerTickets(int customerNo)async{
                   locationLogo: 'assets/images/${userData[i]["R1"]}',
                   locationName: userData[i]["R2"],
                   parkingSpotNumber: userData[i]["R3"],
-                  ticketDateTime: DateTime.parse(userData[i]["R4"]),
+                  ticketDateTime: userData[i]["R4"],
                   customerNo: customerNo
               ));
         }
@@ -138,9 +137,7 @@ async {
       // the value that will be assign into the parameter
       'PV1': locationNo.toString(),
       //   PV1 shortcut for Parameter Value
-    }
-
-    ).then((value) async {
+    }).then((value) async {
       userData = jsonDecode(value.body);
       if (userData.isNotEmpty) {
         for (int i = 0; i < userData.length; i++) {
