@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../models/customer_tickets_model.dart';
 import '../modules/fluid_nav_bar.dart';
 import 'bookYourSpot.dart';
 
 class ReservedPage extends StatefulWidget {
+  const ReservedPage({super.key});
+
   @override
   _ReservedPageState createState() => _ReservedPageState();
 }
 
 class _ReservedPageState extends State<ReservedPage> {
+  List<CustomerTickets> customerTickets = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,15 +29,13 @@ class _ReservedPageState extends State<ReservedPage> {
                 builder: (context)=> const BookYourSpot(title: 'Parking Spots | Locations List')));
             },
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.all(20.0),
-              primary: Colors.white,
-              onPrimary: Colors.black87,
+              foregroundColor: Colors.black87, backgroundColor: Colors.white, padding: const EdgeInsets.all(20.0),
               elevation: 15,
               shadowColor: Colors.grey,
               alignment: Alignment.centerLeft,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           const Text(
             "My ParKing TicKet",
             style: TextStyle(fontSize: 20, color: Colors.grey),
@@ -46,6 +49,6 @@ class _ReservedPageState extends State<ReservedPage> {
                 ),
               ))
         ]),
-        bottomNavigationBar: Container(height: 50, child: FluidNavBar()));
+        bottomNavigationBar: const SizedBox(height: 50, child: FluidNavBar()));
   }
 }

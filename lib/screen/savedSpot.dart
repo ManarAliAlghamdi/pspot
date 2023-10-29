@@ -30,9 +30,7 @@ class _SavedSpotState extends State<SavedSpot> {
                   builder: (context)=> const BookYourSpot(title: 'Parking Spots | Locations List')));
             },
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.all(20.0),
-              primary: Colors.white,
-              onPrimary: Colors.black87,
+              foregroundColor: Colors.black87, backgroundColor: Colors.white, padding: const EdgeInsets.all(20.0),
               elevation: 15,
               shadowColor: Colors.grey,
               alignment: Alignment.centerLeft,
@@ -52,6 +50,6 @@ class _SavedSpotState extends State<SavedSpot> {
                 ),
               ))
         ]),
-        bottomNavigationBar: SizedBox(height: 50, child: FluidNavBar()));
+        bottomNavigationBar: const SizedBox(height: 50, child: FluidNavBar()));
   }
 }

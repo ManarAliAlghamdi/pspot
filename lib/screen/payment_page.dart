@@ -5,6 +5,8 @@ import 'Done_page.dart';
 
 
 class PaymentPage extends StatefulWidget {
+  const PaymentPage({super.key});
+
   @override
   _PaymentPageState createState() => _PaymentPageState();
 }
@@ -19,11 +21,11 @@ class _PaymentPageState extends State<PaymentPage> {
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(
                       top: 20,
                       left: 10,
@@ -36,9 +38,9 @@ class _PaymentPageState extends State<PaymentPage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                     child: Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -47,7 +49,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 3,
                             blurRadius: 10,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
@@ -152,9 +154,9 @@ class _PaymentPageState extends State<PaymentPage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                     child: Container(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
@@ -163,14 +165,14 @@ class _PaymentPageState extends State<PaymentPage> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 3,
                             blurRadius: 10,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
                       child: Column(
                         children: [
                           RadioListTile(
-                            title: Text("Debit/credit card"),
+                            title: const Text("Debit/credit card"),
                             value: "card",
                             groupValue: cards,
                             onChanged: (val) {
@@ -180,7 +182,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             },
                           ),
                           RadioListTile(
-                            title: Text("Apple Pay"),
+                            title: const Text("Apple Pay"),
                             value: "apple_pay",
                             groupValue: cards,
                             onChanged: (val) {
@@ -190,7 +192,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             },
                           ),
                           RadioListTile(
-                            title: Text("Split in 4, interest-free"),
+                            title: const Text("Split in 4, interest-free"),
                             value: "split",
                             groupValue: cards,
                             onChanged: (val) {
@@ -204,11 +206,11 @@ class _PaymentPageState extends State<PaymentPage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
                     child: Center(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Color(0xffc4dde0),
+                          backgroundColor: const Color(0xffc4dde0),
                           elevation: 5,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
@@ -224,11 +226,11 @@ class _PaymentPageState extends State<PaymentPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DonePage(),
+                              builder: (context) => const DonePage(),
                             ),
                           );
                         },
-                        child: Text("Pay Now",
+                        child: const Text("Pay Now",
                             style:
                                 TextStyle(fontSize: 20, color: Colors.white)),
                       ),

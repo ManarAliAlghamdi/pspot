@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pspot/screen/homeScreen.dart';
 import 'package:pspot/screen/savedSpot.dart';
@@ -9,6 +8,8 @@ import '../screen/bookYourSpot.dart';
 import '../screen/reservedPage.dart';
 
 class FluidNavBar extends StatefulWidget {
+  const FluidNavBar({super.key});
+
   @override
   _FluidNavBarState createState() => _FluidNavBarState();
 }
@@ -28,10 +29,10 @@ class _FluidNavBarState extends State<FluidNavBar> {
       _selectedIndex = index;
       if (index == 0) {
         Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => EditProfileUI()));
+            builder: (context) => const EditProfileUI()));
       } else if (index == 1) {
         Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => ReservedPage()));
+            builder: (context) => const ReservedPage()));
       } else if (index == 2) {
         Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (context) => const HomeScreen()));
@@ -87,7 +88,7 @@ class _FluidNavBarState extends State<FluidNavBar> {
             return Row(
               children: [
                 const SizedBox(width: 10,),
-                Container(
+                SizedBox(
                   width: 50,
                   child: IconButton(
                     onPressed: () => _onNavItemTapped(index),

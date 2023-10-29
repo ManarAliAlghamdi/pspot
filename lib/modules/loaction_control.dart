@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -32,7 +30,7 @@ class _LocationControl  extends State<LocationControl> {
           Row(children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: SizedBox(
                 height: 60,
                 width: 70,
 
@@ -52,10 +50,10 @@ class _LocationControl  extends State<LocationControl> {
                 children: [
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                           width:MediaQuery.of(context).size.width - 180,
-                          child: Text(locationInfo!.locationName,textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
-                      Container(
+                          child: Text(locationInfo!.locationName,textAlign: TextAlign.left,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
+                      SizedBox(
                         width:MediaQuery.of(context).size.width - 180,
                         child: Text(locationInfo!.locationAvailableSpots > 0? formatter.format(locationInfo!.locationAvailableSpots): 'No spots available',textAlign: TextAlign.right,style: TextStyle(color: locationInfo!.locationAvailableSpots == 0? Colors.red:Colors.black,),),),
                       LinearPercentIndicator(

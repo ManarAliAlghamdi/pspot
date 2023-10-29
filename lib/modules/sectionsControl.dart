@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../models/locations_model.dart';
 import '../screen/payment_page.dart';
@@ -54,7 +50,7 @@ class _SectionControl  extends State<SectionControl> {
                 children: [
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                           width: MediaQuery
                               .of(context)
                               .size
@@ -62,7 +58,7 @@ class _SectionControl  extends State<SectionControl> {
                           child: Text('Section: ${sectionInfo!
                               .sectionDescription}',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 30),)),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -99,7 +95,7 @@ class _SectionControl  extends State<SectionControl> {
                                                   10.0),
                                               child: Stack(
                                                   children: [
-                                                    Container(
+                                                    SizedBox(
                                                         height: 100,
                                                         child: FittedBox(
                                                             fit: BoxFit.fill,
@@ -118,7 +114,7 @@ class _SectionControl  extends State<SectionControl> {
                                                       child: Text(
                                                         leftParkings[index]
                                                             .parkingSpotDescription,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 30),),
                                                     ),
                                                   ]),
@@ -153,7 +149,7 @@ class _SectionControl  extends State<SectionControl> {
                                                   10.0),
                                               child: Stack(
                                                   children: [
-                                                    Container(
+                                                    SizedBox(
                                                         height: 100,
                                                         child: FittedBox(
                                                             fit: BoxFit.fill,
@@ -165,13 +161,13 @@ class _SectionControl  extends State<SectionControl> {
                                                                       MaterialPageRoute(
                                                                           builder: (
                                                                               context) =>
-                                                                              PaymentPage()));},
+                                                                              const PaymentPage()));},
                                                                 child: Image.asset('assets/images/reservedParking.png'))
                                                                 :
                                                             GestureDetector(
                                                                 onTap: () {
                                                                   Navigator.pushReplacement(context,
-                                                                      MaterialPageRoute(builder: (context) => PaymentPage()));
+                                                                      MaterialPageRoute(builder: (context) => const PaymentPage()));
                                                                 },
                                                                 child: Image.asset('assets/images/emptyParking.png'))
                                                         )
@@ -182,7 +178,7 @@ class _SectionControl  extends State<SectionControl> {
                                                       child: Text(
                                                         rightParkings[index]
                                                             .parkingSpotDescription,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 30),),
                                                     ),
 

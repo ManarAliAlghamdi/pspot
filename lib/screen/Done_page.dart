@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pspot/screen/homeScreen.dart';
 
 class DonePage extends StatelessWidget {
+  const DonePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,8 +17,8 @@ class DonePage extends StatelessWidget {
               width: 400,
               height: 400,
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'You have been booked your \n parking spots successfully',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -24,7 +26,7 @@ class DonePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
 
@@ -32,12 +34,10 @@ class DonePage extends StatelessWidget {
                       builder: (context)=> const HomeScreen()));
 
               },
-              child: Text('Done',
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
               style: ElevatedButton.styleFrom(
-                primary: Color(0xffc4dde0),
+                backgroundColor: const Color(0xffc4dde0),
                 elevation: 5,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
@@ -46,8 +46,10 @@ class DonePage extends StatelessWidget {
                   ),
                 ),
                 padding:
-                    EdgeInsets.only(left: 80, right: 80, top: 20, bottom: 20),
+                    const EdgeInsets.only(left: 80, right: 80, top: 20, bottom: 20),
               ),
+              child: const Text('Done',
+                  style: TextStyle(fontSize: 20, color: Colors.white)),
             ),
           ],
         ),

@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -35,10 +33,10 @@ class _FloorControl  extends State<FloorControl> {
                 children: [
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                           width:MediaQuery.of(context).size.width - 180,
-                          child: Text(floorInfo!.floorDescription,textAlign: TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
-                      Container(
+                          child: Text(floorInfo!.floorDescription,textAlign: TextAlign.left,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
+                      SizedBox(
                         width:MediaQuery.of(context).size.width - 180,
                         child: Text("${floorInfo!.floorAvailableSpots > 0? floorInfo!.floorAvailableSpots: 'No spots available'}",textAlign: TextAlign.right,style: TextStyle(color: floorInfo!.floorAvailableSpots == 0? Colors.red:Colors.black,),),),
                       LinearPercentIndicator(

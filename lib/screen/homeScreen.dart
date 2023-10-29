@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../modules/fluid_nav_bar.dart';
@@ -15,20 +14,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfffffdfa),
+      backgroundColor: const Color(0xfffffdfa),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget> [
             Container(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 236, 235, 235),
+                        color: const Color.fromARGB(255, 236, 235, 235),
                         borderRadius: BorderRadius.circular(10)
                     ),
                     child: const TextField(
@@ -95,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
 
       ),
-      bottomNavigationBar: SizedBox(height: 100, child: FluidNavBar()),
+      bottomNavigationBar: const SizedBox(height: 100, child: FluidNavBar()),
     );
 
   }
@@ -115,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
                 begin: Alignment.bottomRight,
-                stops: [0.1, 0.9],
+                stops: const [0.1, 0.9],
                 colors: [
                   Colors.black.withOpacity(.0),
                   Colors.black.withOpacity(.0)

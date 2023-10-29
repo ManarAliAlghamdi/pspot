@@ -20,26 +20,27 @@ class _splashscreenState extends State<splashscreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), (){
+    Timer(const Duration(seconds: 5), (){
       Navigator.pushReplacement(context, MaterialPageRoute(
         builder: (context)=> const SignUp()));
     });
   }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffC4DEDF),
+      backgroundColor: const Color(0xffC4DEDF),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/pslogo.png'),
-            Text('PS SPOT' , style: TextStyle(
+            const Text('PS SPOT' , style: TextStyle(
               fontSize: 45, 
               color: Colors.black87, 
               fontWeight: FontWeight.bold),  
             ),
-            SizedBox(height: 25,),
-            Text('chose your own parking' , style: TextStyle(
+            const SizedBox(height: 25,),
+            const Text('chose your own parking' , style: TextStyle(
               fontSize: 25, 
               color: Colors.black87, 
               fontWeight: FontWeight.bold),  

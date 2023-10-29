@@ -2,7 +2,6 @@
 import'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'bookYourSpot.dart';
 import 'homeScreen.dart';
 import 'login.dart';
 // import 'package:project3/screen/saved_places.dart';
@@ -60,7 +59,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 240, 235, 235),
+      backgroundColor: const Color.fromARGB(255, 240, 235, 235),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -71,142 +70,142 @@ class _SignUpState extends State<SignUp> {
                 'Sign Up',
                 style: GoogleFonts.robotoCondensed(
                     fontSize: 40, fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 71, 69, 69)),
+                    color: const Color.fromARGB(255, 71, 69, 69)),
               ),
               //subtitle
               Text(
                 'Welcome Here you can Sign Up',
                 style: GoogleFonts.robotoCondensed(fontSize: 18),
               ),
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
             TextField(cursorColor: Colors.black,
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(0.0),
+                contentPadding: const EdgeInsets.all(0.0),
                 labelText: 'User Name',
                 hintText: 'Full Nmae',
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 14.0,
                   fontWeight: FontWeight.w400,
                 ),
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: Colors.grey,
                   fontSize: 14.0,
                 ),
-                prefixIcon: Icon(Icons.supervised_user_circle_outlined, color: Colors.black, size: 18, ),
+                prefixIcon: const Icon(Icons.supervised_user_circle_outlined, color: Colors.black, size: 18, ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                floatingLabelStyle: TextStyle(
+                floatingLabelStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 18.0,
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black, width: 1.5),
+                  borderSide: const BorderSide(color: Colors.black, width: 1.5),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                       ),
                     ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             TextField(cursorColor: Colors.black,
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(0.0),
+                contentPadding: const EdgeInsets.all(0.0),
                 labelText: 'Phone NO',
                 hintText: 'Phone Number',
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 14.0,
                   fontWeight: FontWeight.w400,
                 ),
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: Colors.grey,
                   fontSize: 14.0,
                 ),
-                prefixIcon: Icon(Icons.phone_android, color: Colors.black, size: 18, ),
+                prefixIcon: const Icon(Icons.phone_android, color: Colors.black, size: 18, ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                floatingLabelStyle: TextStyle(
+                floatingLabelStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 18.0,
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black, width: 1.5),
+                  borderSide: const BorderSide(color: Colors.black, width: 1.5),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                       ),
                     ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             TextField(cursorColor: Colors.black,
               controller: _passwordControoler ,
               obscureText: true,
               decoration: InputDecoration(
-                suffixIcon: Icon(Icons.visibility_off,color: Colors.grey,),
-                contentPadding: EdgeInsets.all(0.0),
+                suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
+                contentPadding: const EdgeInsets.all(0.0),
                 labelText: 'Password',
                 hintText: 'Password',
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 14.0,
                   fontWeight: FontWeight.w400,
 
                 ),
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: Colors.grey,
                   fontSize: 14.0,
                 ),
-                prefixIcon: Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
+                prefixIcon: const Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                floatingLabelStyle: TextStyle(
+                floatingLabelStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 18.0,
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black, width: 1.5),
+                  borderSide: const BorderSide(color: Colors.black, width: 1.5),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                       ),
                     ),
 
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             TextField(cursorColor: Colors.black,
               controller: _confirmpasswordControoler,
               obscureText: true,
               decoration: InputDecoration(
-                suffixIcon: Icon(Icons.visibility_off,color: Colors.grey,),
-                contentPadding: EdgeInsets.all(0.0),
+                suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
+                contentPadding: const EdgeInsets.all(0.0),
                 labelText: 'Confirm',
                 hintText: 'Confirm Password',
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 14.0,
                   fontWeight: FontWeight.w400,
                 ),
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: Colors.grey,
                   fontSize: 14.0,
                 ),
-                prefixIcon: Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
+                prefixIcon: const Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                floatingLabelStyle: TextStyle(
+                floatingLabelStyle: const TextStyle(
                   color: Colors.black,
                   fontSize: 18.0,
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black, width: 1.5),
+                  borderSide: const BorderSide(color: Colors.black, width: 1.5),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                       ),
                     ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Padding(
@@ -214,8 +213,8 @@ class _SignUpState extends State<SignUp> {
                 child: GestureDetector(
                   onTap: saved,
                   child: Container(
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
                         color: Color(0xffc4dde0))
                     ,
                         //borderRadius: BorderRadius.circular(12)),
@@ -235,7 +234,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               //text_signUp
@@ -254,7 +253,7 @@ class _SignUpState extends State<SignUp> {
                   child: Text(
                     'Sign in', // توديني لصفحه التسجيل بس ما تفعلت
                     style: GoogleFonts.robotoCondensed(
-                      color: Color.fromRGBO(113, 180, 177, 0.984),
+                      color: const Color.fromRGBO(113, 180, 177, 0.984),
                       fontWeight: FontWeight.bold,
                     ),
                   ),

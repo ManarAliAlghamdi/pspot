@@ -1,7 +1,5 @@
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import '../models/locations_model.dart';
 import '../models/shared_methods.dart';
 import '../modules/floor_control.dart';
@@ -136,7 +134,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.sizeOf(context).height,
           child: Column(
             children: [
@@ -214,7 +212,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
                               showLocations = true;
                             });
                           },
-                          child: Text(
+                          child: const Text(
                             ' |Back to locations',
                             style: TextStyle(
                                 fontSize: 30,
@@ -226,21 +224,21 @@ class _BookYourSpotState extends State<BookYourSpot> {
                       ),
                       Container(
                           alignment: Alignment.center,
-                          color: Color(0xffC4DFDF),
+                          color: const Color(0xffC4DFDF),
                           height: 50,
                           child: Text(
                             currentLocation,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           )),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SingleChildScrollView(
-                          child: Container(
+                          child: SizedBox(
                             height: MediaQuery.sizeOf(context).height - 350,
-                            child: filteredLocationFloors.length == 0
-                                ? Text('No Data')
-                                : Container(
+                            child: filteredLocationFloors.isEmpty
+                                ? const Text('No Data')
+                                : SizedBox(
                                    height: MediaQuery.of(context).size.height - 300,
                                    width: MediaQuery.of(context).size.width - 50,
                                  child: RefreshIndicator(
@@ -300,7 +298,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
               Visibility(
                 visible: showSections,
                 child: Container(
-                  color: Color(0xffC4DFDF),
+                  color: const Color(0xffC4DFDF),
                   height: MediaQuery.sizeOf(context).height-100,
                   child: Column(
 
@@ -367,7 +365,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(height: 100, child: FluidNavBar()),
+      bottomNavigationBar: const SizedBox(height: 100, child: FluidNavBar()),
     );
   }
 }
