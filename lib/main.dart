@@ -1,5 +1,6 @@
-import 'package:pspot/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'screen/splash_screen.dart';
+
 
 
 
