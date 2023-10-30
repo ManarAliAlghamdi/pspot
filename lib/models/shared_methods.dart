@@ -51,18 +51,20 @@ Future<List<LocationModel>> getLocations() async {
   }
 }
 
-Future<List<CustomerTicketDetails>> gtCustomerTicketDetails(int customerNo, int invoiceNo) async {
+Future<List<CustomerTicketDetails>> getCustomerTicketDetails(/*int customerNo,*/ int invoiceNo) async {
   List<CustomerTicketDetails> ticketsDetailsList = [];
   try {
     String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerTicketDetails&conncectionStringInWebConfig=pSpotconnection";
     List userData = [];
     Uri finalUri = Uri.parse(uri);
     await http.post(finalUri, body: {
-      'P1': '@customerNo',
-      'PV1': customerNo.toString(),
+      'P1': '@invoiceNo',
+      'PV1': invoiceNo.toString(),
 
-      'P2': '@invoiceNo',
-      'PV2': invoiceNo.toString(),
+      // 'P2': '@customerNo',
+      // 'PV2': customerNo.toString(),
+
+
     }).then((value) async {
       userData = jsonDecode(value.body);
       if (userData.isNotEmpty) {
@@ -75,14 +77,14 @@ Future<List<CustomerTicketDetails>> gtCustomerTicketDetails(int customerNo, int 
                   parkingSpotNumber: userData[i]["R4"],
                   parkingSectionDescription: userData[i]["R5"],
                   parkingFloorDescriptions: userData[i]["R6"],
-                  invoiceDateTime: DateTime.parse(userData[i]["R7"]),
+                  invoiceDateTime: userData[i]["R7"],
                   ticketPeriod: double.parse(userData[i]["R8"]),
                   parkingSpotCostPerHour: double.parse(userData[i]["R9"]),
                   subTotal: double.parse(userData[i]["R10"]),
                   taxAmount: double.parse(userData[i]["R11"]),
                   totalCost: double.parse(userData[i]["R12"]),
                   invoicePaymentStatus: userData[i]["R13"],
-                  customerNo: customerNo,
+                  // customerNo: customerNo,
                   invoiceNo: invoiceNo)
           );
         }
@@ -109,11 +111,12 @@ Future<List<CustomerTickets>> getCustomerTickets(int customerNo)async{
         for (int i = 0; i < userData.length; i++) {
           ticketsList.add(
               CustomerTickets(
-                  locationLogo: 'assets/images/${userData[i]["R1"]}',
-                  locationName: userData[i]["R2"],
-                  parkingSpotNumber: userData[i]["R3"],
-                  ticketDateTime: userData[i]["R4"],
-                  customerNo: customerNo
+                locationLogo: 'assets/images/${userData[i]["R1"]}',
+                locationName: userData[i]["R2"],
+                parkingSpotNumber: userData[i]["R3"],
+                ticketDateTime: userData[i]["R4"],
+                invoiceNo: int.parse(userData[i]["R5"]),
+                customerNo: customerNo,
               ));
         }
       }
