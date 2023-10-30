@@ -5,14 +5,14 @@ class CustomerTicketDetails {
   final String parkingSpotNumber;
   final String parkingSectionDescription;
   final String parkingFloorDescriptions;
-  final DateTime invoiceDateTime;
+  final String invoiceDateTime;
   final double ticketPeriod;
   final double parkingSpotCostPerHour;
   final double subTotal;
   final double taxAmount;
   final double totalCost;
   final String invoicePaymentStatus;
-  final int customerNo;
+  // final int customerNo;
   final int invoiceNo;
 
 
@@ -30,27 +30,46 @@ class CustomerTicketDetails {
     required this.taxAmount,
     required this.totalCost,
     required this.invoicePaymentStatus,
-    required this.customerNo,
+    // required this.customerNo,
     required this.invoiceNo
 
 
   });
 
 }
-class CustomerTickets {
+class CustomerTickets{
   final String locationLogo;
   final String locationName;
   final String parkingSpotNumber;
-  final DateTime ticketDateTime;
+  final String ticketDateTime;
+  final int invoiceNo;
   final int customerNo;
+
 
   CustomerTickets({
     required this.locationLogo,
     required this.locationName,
     required this.parkingSpotNumber,
     required this.ticketDateTime,
+    required this.invoiceNo,
     required this.customerNo
+
 
 
   });
 }
+// final int customerId;
+// final int parkingSpotId;
+// final int sectionNo;
+// final int floorNo;
+// final int locationNo;
+// final int ticketNo;
+// final int invoiceNo;
+//
+// required this.customerId,
+// required this.parkingSpotId,
+// required this.sectionNo,
+// required this.floorNo,
+// required this.locationNo,
+// required this.ticketNo,
+// required this.invoiceNo,
