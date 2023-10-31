@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screen/reservedPage.dart';
-import 'screen/signup.dart';
-import 'screen/splash_screen.dart';
+import 'screen/saved_spot.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: splashscreen(),
+      home: ReservedPage(),
     );
   }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import '/models/shared_methods.dart';
 import '/modules/customerTicketDetails.dart';
-
 import '../models/customer_tickets_model.dart';
 import '../modules/customerTickets_control.dart';
 import '../modules/fluid_nav_bar.dart';
-import 'bookYourSpot.dart';
+
 
 class ReservedPage extends StatefulWidget {
   const ReservedPage({super.key});
@@ -26,6 +25,7 @@ class _ReservedPageState extends State<ReservedPage> {
   bool showTicketDetails = false;
   bool showProcessing = true;
 
+  //  create the The customer tickets List from the database
   void initTickets(customerNo) async {
     customerTickets = [];
     showProcessing = true;
@@ -41,6 +41,7 @@ class _ReservedPageState extends State<ReservedPage> {
     });
   }
 
+  // when user refresh the page the it will refilled the list from the database
   Future<void> _refreshTickets() async {
     setState(() {
       showTicket = false;
@@ -55,7 +56,8 @@ class _ReservedPageState extends State<ReservedPage> {
       filteredCustomerTickets = customerTickets;
     });
   }
-
+  // after clicked the one of the list item this function will grab the tickets details according
+  // to the item index
   void showTicketsDetails(invoiceNo) async {
     setState(() {
       showTicketDetails = false;
@@ -72,7 +74,7 @@ class _ReservedPageState extends State<ReservedPage> {
       });
     });
   }
-
+  // filled up the filtered list according to user search
   void filterCustomerTickets() {
     setState(() {
       filteredCustomerTickets =
@@ -98,8 +100,6 @@ class _ReservedPageState extends State<ReservedPage> {
           title: const Text(
             "Parking Tickets", style: TextStyle(color: Colors.black),),
           backgroundColor: Color(0xffC4DFDF),
-          actions: [
-          ],
         ),
         body: SingleChildScrollView(
             child: SizedBox(
@@ -130,7 +130,6 @@ class _ReservedPageState extends State<ReservedPage> {
                                     filterCustomerTickets();
                                   }),
                               SizedBox(
-
                                 height: MediaQuery
                                     .of(context)
                                     .size

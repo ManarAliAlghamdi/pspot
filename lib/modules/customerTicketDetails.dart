@@ -19,7 +19,7 @@ class _CustomerTicketsDetailsControlState extends State<CustomerTicketsDetailsCo
     ticketsDetailsInfo = widget.ticketsDetailsInfo;
     String invoiceNo = ticketsDetailsInfo!.invoiceNo.toString();
 
-    String parkingSpotNo = ticketsDetailsInfo!.parkingSpotNumber;
+    // String parkingSpotNo = ticketsDetailsInfo!.parkingSpotNumber;
     return GestureDetector(
         child: Container(
           child: Column(

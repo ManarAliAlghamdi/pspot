@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '/models/customer_tickets_model.dart';
+import 'package:pspot_test/models/customer_faves_models.dart';
+import 'package:pspot_test/models/customer_tickets_model.dart';
 import 'locations_model.dart';
 
 
@@ -51,7 +52,37 @@ Future<List<LocationModel>> getLocations() async {
   }
 }
 
-Future<List<CustomerTicketDetails>> getCustomerTicketDetails(/*int customerNo,*/ int invoiceNo) async {
+Future<List<CustomerFavesTickets>> getCustomerFavesTickets(int customerId)async {
+  List<CustomerFavesTickets> customerFavesTickets = [];
+  try {
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerFavesTickets&conncectionStringInWebConfig=pSpotconnection";
+    List userData = [];
+    Uri finalUri = Uri.parse(uri);
+    await http.post(finalUri, body: {
+      'P1': '@customerId',
+      'PV1': customerId.toString(),
+    }).then((value) {
+      userData = jsonDecode(value.body);
+      if (userData.isNotEmpty) {
+        for (int i = 0; i < userData.length; i++) {
+          customerFavesTickets.add(
+              CustomerFavesTickets(
+                  locationLogo: 'assets/images/${userData[i]["R1"]}',
+                  locationName: userData[i]["R2"],
+                  parkingSpotNumber: userData[i]["R3"],
+                  parkingSectionDescription: userData[i]["R4"],
+                  parkingFloorDescriptions: userData[i]["R5"],
+                  customerId: customerId));
+        }
+      }
+    });
+    return customerFavesTickets;
+  } catch (ex) {
+    return customerFavesTickets;
+  }
+}
+
+Future<List<CustomerTicketDetails>> getCustomerTicketDetails(int invoiceNo) async {
   List<CustomerTicketDetails> ticketsDetailsList = [];
   try {
     String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerTicketDetails&conncectionStringInWebConfig=pSpotconnection";
@@ -60,11 +91,6 @@ Future<List<CustomerTicketDetails>> getCustomerTicketDetails(/*int customerNo,*/
     await http.post(finalUri, body: {
       'P1': '@invoiceNo',
       'PV1': invoiceNo.toString(),
-
-      // 'P2': '@customerNo',
-      // 'PV2': customerNo.toString(),
-
-
     }).then((value) async {
       userData = jsonDecode(value.body);
       if (userData.isNotEmpty) {
@@ -84,7 +110,6 @@ Future<List<CustomerTicketDetails>> getCustomerTicketDetails(/*int customerNo,*/
                 taxAmount: double.parse(userData[i]["R11"]),
                 totalCost: double.parse(userData[i]["R12"]),
                 invoicePaymentStatus: userData[i]["R13"],
-                // customerNo: customerNo,
                 invoiceNo: invoiceNo)
           );
         }

@@ -17,22 +17,20 @@ class _CustomerTicketsControlState extends State<CustomerTicketsControl> {
   @override
   Widget build(BuildContext context) {
     ticketsInfo = widget.ticketsInfo;
-    final String parkingSpotNo = ticketsInfo!.parkingSpotNumber;
-    final String invoiceDate = ticketsInfo!.ticketDateTime;
-
     return GestureDetector(
         child: Container(
           child: Column(
               children: [
                 const SizedBox(height: 10,),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Added this
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
 
                       child: SizedBox(
-                        height: 60,
-                        width: 70,
+                        height: 50,
+                        width: 56,
                         child: FittedBox(
                           fit: BoxFit.fill,
                           child: Image.asset(
@@ -54,39 +52,50 @@ class _CustomerTicketsControlState extends State<CustomerTicketsControl> {
                             child: Text(ticketsInfo!.locationName,
                               textAlign: TextAlign.left,
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),),
+                                  fontWeight: FontWeight.bold, fontSize: 15),),
                           ),
                           // Container(height: 7),
                           SizedBox(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width - 180,
-                            child: Text("invoice date: $invoiceDate",
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.black),),
+                            width: MediaQuery.of(context).size.width - 180,
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: "Invoice Date: : ",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: ticketsInfo!.ticketDateTime,
+                                    style: const TextStyle(color: Color(0xff93A7A7)),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                           SizedBox(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width - 180,
-                            child: Text("parking spot number: $parkingSpotNo",
-                              style: const TextStyle(
-                                fontSize: 14, color: Colors.black,),),
+                            width: MediaQuery.of(context).size.width - 180,
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: "ParkingSpot Number: : ",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: ticketsInfo!.parkingSpotNumber,
+                                    style: const TextStyle(color: Color(0xff93A7A7)),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-
-                          Container(height: 10,)
                         ],
                       ),
-
                     ),
-                    // Padding(padding: EdgeInsets.only(),
-                    //
-                    // child: Column(
-                    //   children: [],
-                    // ),)
+                    Padding(
+                      padding: const EdgeInsets.only(),
+                      child: IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
+                    ),
                   ],
                 ),
               ]),

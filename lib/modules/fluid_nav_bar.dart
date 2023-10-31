@@ -4,7 +4,7 @@ import '../screen/Profile.dart';
 import '../screen/bookYourSpot.dart';
 import '../screen/homeScreen.dart';
 import '../screen/reservedPage.dart';
-import '../screen/savedSpot.dart';
+import '../screen/saved_spot.dart';
 
 class FluidNavBar extends StatefulWidget {
   const FluidNavBar({super.key});
@@ -98,6 +98,8 @@ class _FluidNavBarState extends State<FluidNavBar> {
                     ),
                   ),
                 ),
+
+                
                 const SizedBox(width: 20,),
               ],
             );
