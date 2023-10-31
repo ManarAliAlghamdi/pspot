@@ -1,11 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
 import 'signup.dart';
-
-
-
 
 class splashscreen extends StatefulWidget {
   const splashscreen({super.key});
