@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pspot/screen/homeScreen.dart';
-import 'package:pspot/screen/savedSpot.dart';
-
 import '../models/nav_item_model.dart';
 import '../screen/Profile.dart';
 import '../screen/bookYourSpot.dart';
+import '../screen/homeScreen.dart';
 import '../screen/reservedPage.dart';
+import '../screen/savedSpot.dart';
 
 class FluidNavBar extends StatefulWidget {
   const FluidNavBar({super.key});

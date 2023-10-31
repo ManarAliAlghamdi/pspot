@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pspot/screen/homeScreen.dart';
+
+import 'homeScreen.dart';
 
 class DonePage extends StatelessWidget {
   const DonePage({super.key});

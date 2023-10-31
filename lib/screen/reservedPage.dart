@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pspot_test/models/shared_methods.dart';
-import 'package:pspot_test/modules/customerTicketDetails.dart';
+import '/models/shared_methods.dart';
+import '/modules/customerTicketDetails.dart';
 
 import '../models/customer_tickets_model.dart';
 import '../modules/customerTickets_control.dart';
@@ -152,7 +152,7 @@ class _ReservedPageState extends State<ReservedPage> {
                                             showTicketsDetails(filteredCustomerTickets[index].invoiceNo);
                                             invoiceNo = filteredCustomerTickets[index].invoiceNo;
                                             x = invoiceNo.toString();
-                                          },
+                                            },
 
                                           child: Row(
                                             children: [

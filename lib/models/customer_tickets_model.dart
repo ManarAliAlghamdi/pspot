@@ -34,7 +34,7 @@ class CustomerTicketDetails {
     required this.invoiceNo
 
 
-  });
+});
 
 }
 class CustomerTickets{

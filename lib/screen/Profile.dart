@@ -1,6 +1,6 @@
 // import 'package:demo_project/main.dart';
 import 'package:flutter/material.dart';
-import 'package:pspot/screen/homeScreen.dart';
+import 'homeScreen.dart';
 
 import '../modules/fluid_nav_bar.dart';
 

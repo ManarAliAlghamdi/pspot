@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:pspot_test/models/customer_tickets_model.dart';
+import '/models/customer_tickets_model.dart';
 import 'locations_model.dart';
 
 
@@ -70,22 +70,22 @@ Future<List<CustomerTicketDetails>> getCustomerTicketDetails(/*int customerNo,*/
       if (userData.isNotEmpty) {
         for (int i = 0; i < userData.length; i++) {
           ticketsDetailsList.add(
-              CustomerTicketDetails(
-                  locationLogo: 'assets/images/${userData[i]["R1"]}',
-                  locationName: userData[i]["R2"],
-                  invoiceId: int.parse(userData[i]["R3"]),
-                  parkingSpotNumber: userData[i]["R4"],
-                  parkingSectionDescription: userData[i]["R5"],
-                  parkingFloorDescriptions: userData[i]["R6"],
-                  invoiceDateTime: userData[i]["R7"],
-                  ticketPeriod: double.parse(userData[i]["R8"]),
-                  parkingSpotCostPerHour: double.parse(userData[i]["R9"]),
-                  subTotal: double.parse(userData[i]["R10"]),
-                  taxAmount: double.parse(userData[i]["R11"]),
-                  totalCost: double.parse(userData[i]["R12"]),
-                  invoicePaymentStatus: userData[i]["R13"],
-                  // customerNo: customerNo,
-                  invoiceNo: invoiceNo)
+            CustomerTicketDetails(
+                locationLogo: 'assets/images/${userData[i]["R1"]}',
+                locationName: userData[i]["R2"],
+                invoiceId: int.parse(userData[i]["R3"]),
+                parkingSpotNumber: userData[i]["R4"],
+                parkingSectionDescription: userData[i]["R5"],
+                parkingFloorDescriptions: userData[i]["R6"],
+                invoiceDateTime: userData[i]["R7"],
+                ticketPeriod: double.parse(userData[i]["R8"]),
+                parkingSpotCostPerHour: double.parse(userData[i]["R9"]),
+                subTotal: double.parse(userData[i]["R10"]),
+                taxAmount: double.parse(userData[i]["R11"]),
+                totalCost: double.parse(userData[i]["R12"]),
+                invoicePaymentStatus: userData[i]["R13"],
+                // customerNo: customerNo,
+                invoiceNo: invoiceNo)
           );
         }
       }
@@ -111,13 +111,13 @@ Future<List<CustomerTickets>> getCustomerTickets(int customerNo)async{
         for (int i = 0; i < userData.length; i++) {
           ticketsList.add(
               CustomerTickets(
-                locationLogo: 'assets/images/${userData[i]["R1"]}',
-                locationName: userData[i]["R2"],
-                parkingSpotNumber: userData[i]["R3"],
-                ticketDateTime: userData[i]["R4"],
+              locationLogo: 'assets/images/${userData[i]["R1"]}',
+              locationName: userData[i]["R2"],
+              parkingSpotNumber: userData[i]["R3"],
+              ticketDateTime: userData[i]["R4"],
                 invoiceNo: int.parse(userData[i]["R5"]),
-                customerNo: customerNo,
-              ));
+              customerNo: customerNo,
+          ));
         }
       }
     });

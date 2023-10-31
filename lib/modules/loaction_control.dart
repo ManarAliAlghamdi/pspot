@@ -16,18 +16,19 @@ class LocationControl extends StatefulWidget {
 class _LocationControl  extends State<LocationControl> {
 
   LocationModel? locationInfo;
-  late AnimationController controller;
+  // late AnimationController controller;
   var formatter = NumberFormat('#######');
   @override
   Widget build(BuildContext context) {
     locationInfo = widget.locationInfo;
 
     return GestureDetector(
-
-      child: Container(child: Column(
+      child: Container(
+        child: Column(
         children: [
           const SizedBox(height: 10,),
-          Row(children: [
+          Row(
+            children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
@@ -37,9 +38,7 @@ class _LocationControl  extends State<LocationControl> {
                 child: FittedBox(
                   fit: BoxFit.fill,
                   child: Image.asset(
-
                     locationInfo!.locationLogo,
-
                   ),
                 ),
               ),

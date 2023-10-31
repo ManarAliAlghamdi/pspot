@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:pspot/screen/signup.dart';
+import 'signup.dart';
 
 
 

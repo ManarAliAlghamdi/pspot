@@ -60,9 +60,19 @@ class _CustomerTicketsDetailsControlState extends State<CustomerTicketsDetailsCo
                                 textAlign: TextAlign.left,  )
 
                           ),
+
                         ],
                       ),
-                    )
+                    ),
+                    // const Padding(padding: EdgeInsets.all(5.0),
+                     //
+                    //   child: Column(
+                    //     children: [
+                    //       SizedBox(
+                    //         child: Text("data"),
+                    //       ),
+                    //     ],
+                    //   ),)
                   ],
                 ),
               ]),

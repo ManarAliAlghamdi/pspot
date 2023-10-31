@@ -21,6 +21,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
   TextEditingController searchTextField = TextEditingController();
   List<LocationModel> locationsList = [];
   List<LocationModel> filteredLocationsList = [];
+
   List<FloorModel> locationFloors = [];
   List<FloorModel> filteredLocationFloors = [];
   List<SectionModel> floorSections = [];
@@ -34,6 +35,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
   bool showFloors = false;
   bool showSections = false;
   bool showProcessing = true;
+
   void initLocations() async {
     locationsList = [];
     await getLocations().then((value) {
@@ -50,7 +52,6 @@ class _BookYourSpotState extends State<BookYourSpot> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     initLocations();
   }
 
@@ -117,8 +118,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
 
   void filterFloorsList(int locationNo) {
     setState(() {
-      filteredLocationFloors =
-          locationFloors.where((i) => i.floorLocationNo == locationNo).toList();
+      filteredLocationFloors = locationFloors.where((i) => i.floorLocationNo == locationNo).toList();
     });
   }
 
@@ -160,8 +160,14 @@ class _BookYourSpotState extends State<BookYourSpot> {
                           filterLocationList();
                         }),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height - 300,
-                      width: MediaQuery.of(context).size.width - 50,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height - 195,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width - 50,
                       child: RefreshIndicator(
                           onRefresh: _refreshLocations,
                           child: ListView.builder(
@@ -169,25 +175,22 @@ class _BookYourSpotState extends State<BookYourSpot> {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    currentLocation =
-                                        filteredLocationsList[index]
-                                            .locationName;
-                                    currentLocationNo =
-                                        filteredLocationsList[index].locationId;
-                                    showLocationFloors(
-                                        filteredLocationsList[index]
-                                            .locationId);
+                                    currentLocation = filteredLocationsList[index].locationName;
+                                    currentLocationNo = filteredLocationsList[index].locationId;
+
+                                    showLocationFloors(filteredLocationsList[index].locationId);
                                   },
                                   child: Row(
                                     children: [
                                       LocationControl(
-                                        locationInfo:
-                                        filteredLocationsList[index],
+                                        locationInfo: filteredLocationsList[index],
                                       ),
                                     ],
                                   ),
                                 );
-                              })),
+                              }
+                              ),
+                      ),
                     ),
                   ],
                 ),

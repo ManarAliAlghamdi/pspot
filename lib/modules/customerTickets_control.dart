@@ -29,6 +29,7 @@ class _CustomerTicketsControlState extends State<CustomerTicketsControl> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
+
                       child: SizedBox(
                         height: 60,
                         width: 70,
@@ -39,6 +40,7 @@ class _CustomerTicketsControlState extends State<CustomerTicketsControl> {
                           ),
                         ),
                       ),
+
                     ),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
@@ -74,10 +76,17 @@ class _CustomerTicketsControlState extends State<CustomerTicketsControl> {
                               style: const TextStyle(
                                 fontSize: 14, color: Colors.black,),),
                           ),
+
                           Container(height: 10,)
                         ],
                       ),
-                    )
+
+                    ),
+                    // Padding(padding: EdgeInsets.only(),
+                    //
+                    // child: Column(
+                    //   children: [],
+                    // ),)
                   ],
                 ),
               ]),
