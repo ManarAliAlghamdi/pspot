@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:pspot_test/models/customer_faves_models.dart';
-import 'package:pspot_test/models/customer_tickets_model.dart';
+import '../models/customer_faves_models.dart';
+import '../models/customer_tickets_model.dart';
 import 'locations_model.dart';
 
 
