@@ -83,7 +83,7 @@ class _EditProfileUIState extends State<EditProfileUI> {
                 buildTextField("Full Name", "Manar Alghamdi", false),
                 buildTextField("Email", "manar07@hotmail.com", false),
                 buildTextField("Password", "1234", true),
-                buildTextField("Phone Number", "0550008921", false),
+                buildTextField("Phone Number ", "0550008921", false),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
