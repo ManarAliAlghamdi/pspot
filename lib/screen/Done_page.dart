@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'homeScreen.dart';
 
-class DonePage extends StatelessWidget {
-  const DonePage({super.key});
+class DonePage extends StatefulWidget {
+  final int staticCustomerId;
+  const DonePage ({Key? key, required this.staticCustomerId}) : super(key: key);
 
   @override
+  State<DonePage> createState() => _DonePageState();
+}
+
+class _DonePageState extends State<DonePage> {
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -32,7 +39,7 @@ class DonePage extends StatelessWidget {
               onPressed: () {
 
                   Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (context)=> const HomeScreen()));
+                      builder: (context)=> HomeScreen(staticCustomerId: widget.staticCustomerId,)));
 
               },
               style: ElevatedButton.styleFrom(

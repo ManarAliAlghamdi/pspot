@@ -5,7 +5,8 @@ import 'Done_page.dart';
 
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({super.key});
+  final int staticCustomerId;
+  const PaymentPage ({Key? key, required this.staticCustomerId}) : super(key: key);
 
   @override
   _PaymentPageState createState() => _PaymentPageState();
@@ -13,9 +14,10 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   var cards;
-
+  int staticCustomerId = 0;
   @override
   Widget build(BuildContext context) {
+    staticCustomerId = widget.staticCustomerId;
     return Scaffold(
       body: ListView(
         children: [
@@ -226,7 +228,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const DonePage(),
+                              builder: (context) =>  DonePage(staticCustomerId: staticCustomerId,),
                             ),
                           );
                         },

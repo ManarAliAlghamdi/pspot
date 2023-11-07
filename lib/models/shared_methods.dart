@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:pspot_test/models/customer_faves_models.dart';
-import 'package:pspot_test/models/customer_tickets_model.dart';
+import '/models/customer_faves_models.dart';
+import '/models/customer_tickets_model.dart';
+import '/models/customers_information.dart';
 import 'locations_model.dart';
 
 
@@ -121,7 +123,76 @@ Future<List<CustomerTicketDetails>> getCustomerTicketDetails(int invoiceNo) asyn
     return ticketsDetailsList;
   }
 }
+
+Future<int> getCustomerId(String customerFirstName, String password)async{
+  int customerId = 0;
+  try{
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_customerLogin&conncectionStringInWebConfig=pSpotconnection";
+    List userData = [];
+    Uri finalUri = Uri.parse(uri);
+    await http.post(finalUri, body: {
+      "P1": "@customerFirstName",
+      "PV1": customerFirstName.toString(),
+
+      "P2": "@password",
+      "PV2": password.toString(),
+    }
+
+    ).then((value)async {
+      userData = jsonDecode(value.body);
+      if(userData.isNotEmpty)
+        {
+          if(userData[0]["R1"] == "ok") {
+            customerId = int.parse(userData[0]["R2"]);
+          }
+            }
+    });
+    return customerId;
+  }catch(ex){
+    print(ex.toString());
+    return customerId;
+  }
+}
+
+
+
+Future<List<CustomerInformation>> getCustomerInformation(int customerId)async{
+  print('Reading $customerId');
+  List<CustomerInformation> customerInformation = [];
+  try{
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_getCustomersInformation&conncectionStringInWebConfig=pSpotconnection";
+    List userData = [];
+    Uri finalUri = Uri.parse(uri);
+    await http.post(finalUri, body: {
+      'P1': '@customerId',
+      'PV1': customerId.toString(),
+    }
+    ).then((value)async{
+      userData = jsonDecode(value.body);
+      if(userData.isNotEmpty){
+        for (int i = 0; i < userData.length; i++) {
+          customerInformation.add(
+              CustomerInformation(
+                  customerFirstName: userData[i]["R1"],
+                  customerLastName: userData[i]["R2"],
+                  customerEmail: userData[i]["R3"],
+                  customerPhoneNumber: userData[i]["R4"],
+                  customerPassword: userData[i]["R5"],
+                  customerId: customerId,
+              )
+          );
+        }
+      }
+    });
+
+    return customerInformation;
+  }catch(ex){
+    return customerInformation;
+
+  }
+}
 Future<List<CustomerTickets>> getCustomerTickets(int customerNo)async{
+
   List<CustomerTickets> ticketsList = [];
   try{
     String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerTickets&conncectionStringInWebConfig=pSpotconnection";

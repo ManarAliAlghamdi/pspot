@@ -6,7 +6,8 @@ import '../screen/payment_page.dart';
 class SectionControl extends StatefulWidget {
   final SectionModel sectionInfo;
   final List<ParkingSpotModel> filteredParkingSpots ;
-  const SectionControl({Key? key, required this.sectionInfo, required this.filteredParkingSpots}) : super(key: key);
+  final int staticCustomerId;
+  const SectionControl({Key? key, required this.sectionInfo, required this.filteredParkingSpots,  required this.staticCustomerId}) : super(key: key);
 
 
   @override
@@ -14,6 +15,7 @@ class SectionControl extends StatefulWidget {
 }
 
 class _SectionControl  extends State<SectionControl> {
+  int staticCustomerId = 0;
   SectionModel? sectionInfo;
   List<ParkingSpotModel> parkingSpots = [];
   late AnimationController controller;
@@ -24,6 +26,7 @@ class _SectionControl  extends State<SectionControl> {
 
   @override
   Widget build(BuildContext context) {
+    staticCustomerId = widget.staticCustomerId;
     sectionInfo = widget.sectionInfo;
     parkingSpots = widget.filteredParkingSpots;
     rightParkings = parkingSpots
@@ -161,13 +164,13 @@ class _SectionControl  extends State<SectionControl> {
                                                                       MaterialPageRoute(
                                                                           builder: (
                                                                               context) =>
-                                                                              const PaymentPage()));},
+                                                                               PaymentPage(staticCustomerId: staticCustomerId,)));},
                                                                 child: Image.asset('assets/images/reservedParking.png'))
                                                                 :
                                                             GestureDetector(
                                                                 onTap: () {
                                                                   Navigator.pushReplacement(context,
-                                                                      MaterialPageRoute(builder: (context) => const PaymentPage()));
+                                                                      MaterialPageRoute(builder: (context) => PaymentPage(staticCustomerId: staticCustomerId ,)));
                                                                 },
                                                                 child: Image.asset('assets/images/emptyParking.png'))
                                                         )

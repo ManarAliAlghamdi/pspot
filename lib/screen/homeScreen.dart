@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import '../modules/fluid_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
+  final int staticCustomerId;
+  const HomeScreen ({Key? key, required this.staticCustomerId}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+
 class _HomeScreenState extends State<HomeScreen> {
+  int staticCustomerId = 0;
   @override
   Widget build(BuildContext context) {
+    staticCustomerId = widget.staticCustomerId;
     return Scaffold(
       backgroundColor: const Color(0xfffffdfa),
       body: SafeArea(
@@ -94,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
 
       ),
-      bottomNavigationBar: const SizedBox(height: 100, child: FluidNavBar()),
+      bottomNavigationBar: SizedBox(height: 100, child: FluidNavBar(staticCustomerId: staticCustomerId,)),
     );
 
   }

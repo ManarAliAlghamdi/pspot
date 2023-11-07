@@ -8,7 +8,9 @@ import '../modules/loaction_control.dart';
 import '../modules/sectionsControl.dart';
 
 class BookYourSpot extends StatefulWidget {
-  const BookYourSpot({super.key, required this.title});
+  final int staticCustomerId;
+  const BookYourSpot({super.key, required this.title,  required this.staticCustomerId});
+
 
   final String title;
 
@@ -18,6 +20,7 @@ class BookYourSpot extends StatefulWidget {
 
 class _BookYourSpotState extends State<BookYourSpot> {
   int _counter = 0;
+  int staticCustomerId = 0;
   TextEditingController searchTextField = TextEditingController();
   List<LocationModel> locationsList = [];
   List<LocationModel> filteredLocationsList = [];
@@ -128,6 +131,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
 
   @override
   Widget build(BuildContext context) {
+    staticCustomerId = widget.staticCustomerId;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -352,6 +356,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   child: SectionControl(
+                                    staticCustomerId: staticCustomerId,
                                     sectionInfo: filteredFloorSections[index],
                                     filteredParkingSpots: getSectionSpots(
                                         filteredFloorSections[index].sectionId),
@@ -368,7 +373,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
           ),
         ),
       ),
-      bottomNavigationBar: const SizedBox(height: 100, child: FluidNavBar()),
+      bottomNavigationBar: SizedBox(height: 100, child: FluidNavBar(staticCustomerId: widget.staticCustomerId,)),
     );
   }
 }

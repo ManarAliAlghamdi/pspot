@@ -7,7 +7,8 @@ import '../screen/reservedPage.dart';
 import '../screen/saved_spot.dart';
 
 class FluidNavBar extends StatefulWidget {
-  const FluidNavBar({super.key});
+  final int staticCustomerId;
+  const FluidNavBar ({Key? key, required this.staticCustomerId}) : super(key: key);
 
   @override
   _FluidNavBarState createState() => _FluidNavBarState();
@@ -15,7 +16,7 @@ class FluidNavBar extends StatefulWidget {
 
 class _FluidNavBarState extends State<FluidNavBar> {
   int _selectedIndex = 0;
-
+  // int staticCustomerId = 0;
   final List<NavItem> _navItems = [
     NavItem(Icons.account_circle_outlined, "Profile"),
     NavItem(Icons.book_outlined, "Reservations"),
@@ -28,16 +29,17 @@ class _FluidNavBarState extends State<FluidNavBar> {
       _selectedIndex = index;
       if (index == 0) {
         Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => const EditProfileUI()));
-      } else if (index == 1) {
+            builder: (context) => UserProfile(staticCustomerId: widget.staticCustomerId,)));
+      } else
+        if (index == 1) {
         Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => const ReservedPage()));
+            builder: (context) =>  ReservedPage(staticCustomerId: widget.staticCustomerId,)));
       } else if (index == 2) {
         Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => const HomeScreen()));
+            builder: (context) => HomeScreen(staticCustomerId: widget.staticCustomerId,)));
       } else if (index == 3) {
         Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => const SavedSpot()));
+            builder: (context) =>  SavedSpot(staticCustomerId: widget.staticCustomerId,)));
       }
     });
   }
@@ -54,7 +56,7 @@ class _FluidNavBarState extends State<FluidNavBar> {
 
           onPressed: () {
             Navigator.pushReplacement(context, MaterialPageRoute(
-                builder: (context)=> const BookYourSpot(title: 'Parking Spots | Locations List')));
+                builder: (context)=> BookYourSpot(title: 'Parking Spots | Locations List', staticCustomerId: widget.staticCustomerId,)));
           },
           backgroundColor: Colors.amberAccent,
 

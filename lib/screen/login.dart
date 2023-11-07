@@ -1,9 +1,7 @@
-//ignore_for_file: prefer_const_constructors
-
-//import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../models/shared_methods.dart';
+import 'Profile.dart';
 import 'homeScreen.dart';
 import 'signup.dart';
 
@@ -15,22 +13,45 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController();
+  final _firstNameController = TextEditingController();
   final _passwordController = TextEditingController();
+  int customerId = 0;
+  String firstName = '';
+  String password = '';
+
+void initCustomerId(String firstName, String password)async{
+
+  await getCustomerId(firstName, password).then((value) {
+    if (1 != 0){
+      print(value);
+    }
+      setState(() {
+        customerId = value;
+      });
+
+  });
+}
+Future<void> _initCustomerId(String firstName, String password)async{
 
 
-
-  @override
-  void dispose() {
-    super.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-  }
-
+  await getCustomerId(firstName, password).then((value) {
+    if (1 != 0){
+      print(value);
+    }
+      customerId = value;
+  });
+}
+//   @override
+//   void dispose() async{
+//
+//    super.dispose();
+//     _firstNameController.dispose();
+//     _passwordController.dispose();
+// }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 240, 235, 235),
+      backgroundColor: const Color.fromARGB(255, 240, 235, 235),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -41,77 +62,92 @@ class LoginScreenState extends State<LoginScreen> {
                 'SIGN IN',
                 style: GoogleFonts.robotoCondensed(
                     fontSize: 40, fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 71, 69, 69)),
+                    color: const Color.fromARGB(255, 71, 69, 69)),
               ),
               //subtitle
               Text(
                 'Welcome back ! Nice to see you again :-)',
                 style: GoogleFonts.robotoCondensed(fontSize: 18),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
+
+
               //E_textfield
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
             TextField(
               cursorColor: Colors.black,
+              controller: _firstNameController,
+              onChanged: (text) {
+                setState(() {
+                  firstName = _firstNameController.text;
+                });
+              },
+
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(0.0),
-                  labelText: 'Phone',
-                  hintText: 'Phone number',
-                  labelStyle: TextStyle(
+                  contentPadding: const EdgeInsets.all(0.0),
+                  labelText: 'First Name',
+                  // hintText: 'Phone number',
+                  labelStyle: const TextStyle(
                     color: Colors.black,
                     fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  prefixIcon: Icon(Icons.phone_android, color: Colors.black, size: 18, ),
+                    fontWeight: FontWeight.w400,),
+                  prefixIcon: const Icon(Icons.person_rounded, color: Colors.black, size: 18),
+
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  floatingLabelStyle: TextStyle(
+                    borderRadius: BorderRadius.circular(10),),
+
+                  floatingLabelStyle: const TextStyle(
                     color: Colors.black,
-                    fontSize: 18.0,
-                  ),
+                    fontSize: 18.0,),
+
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black, width: 1.5),
+                    borderSide: const BorderSide(color: Colors.black, width: 1.5),
                     borderRadius: BorderRadius.circular(10.0),
                         )
                       ),
                     ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               TextField(cursorColor: Colors.black,
+                controller: _passwordController,
                 obscureText: true,
+                onChanged: (text) {
+                  setState(() {
+                    password = _passwordController.text;
+                  });
+                },
                 decoration: InputDecoration(
-                  suffixIcon: Icon(Icons.visibility_off,color: Colors.grey,),
-                  contentPadding: EdgeInsets.all(0.0),
+                  suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
+                  contentPadding: const EdgeInsets.all(0.0),
                   labelText: 'Password',
                   hintText: 'Password',
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     color: Colors.grey,
                     fontSize: 14.0,
                   ),
-                  labelStyle: TextStyle(
+                  labelStyle: const TextStyle(
                     color: Colors.black,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                   ),
-                  prefixIcon: Icon(Icons.key, color: Colors.black, size: 18, ),
+                  prefixIcon: const Icon(Icons.key, color: Colors.black, size: 18, ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  floatingLabelStyle: TextStyle(
+                  floatingLabelStyle: const TextStyle(
                     color: Colors.black,
                     fontSize: 18.0,
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black, width: 1.5),
+                    borderSide: const BorderSide(color: Colors.black, width: 1.5),
                     borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               //signIN_Button
@@ -120,12 +156,21 @@ class LoginScreenState extends State<LoginScreen> {
                 child: GestureDetector(
                   // onTap: signIn,
                   child: Container(
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
                         color: Color(0xffc4dde0))
                       ,
                     child: GestureDetector(
-                      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen( )));},
+                      onTap: () async{
+                       await _initCustomerId(firstName, password);
+
+                         Navigator.push(context, MaterialPageRoute(
+                             builder: (context)=> UserProfile(staticCustomerId: customerId,)
+                         ));
+
+
+                      },
+
                         child: Text(
                           'Sign in',
                           style: GoogleFonts.robotoCondensed(
@@ -137,7 +182,7 @@ class LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               //text_signUp
@@ -156,7 +201,7 @@ class LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     'Sign up now', // توديني لصفحه التسجيل بس ما تفعلت
                     style: GoogleFonts.robotoCondensed(
-                      color: Color.fromRGBO(113, 180, 177, 0.984),
+                      color: const Color.fromRGBO(113, 180, 177, 0.984),
                       fontWeight: FontWeight.bold,
                     ),
                   ),

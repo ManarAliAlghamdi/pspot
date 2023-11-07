@@ -1,10 +1,8 @@
-//import 'package:firebase_auth/firebase_auth.dart';
 import'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'homeScreen.dart';
 import 'login.dart';
-// import 'package:project3/screen/saved_places.dart';
+
 
 
 class SignUp extends StatefulWidget {
@@ -23,8 +21,8 @@ class _SignUpState extends State<SignUp> {
   Future signup() async {
     if (passwordConfirm()){
       //await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim();
-        password: _passwordControoler.text.trim();
+      email: _emailController.text.trim();
+      password: _passwordControoler.text.trim();
       //);
       Navigator.of(context).pushNamed('/');
     }
@@ -77,134 +75,134 @@ class _SignUpState extends State<SignUp> {
                 'Welcome Here you can Sign Up',
                 style: GoogleFonts.robotoCondensed(fontSize: 18),
               ),
-            const SizedBox(height: 40,),
-            TextField(cursorColor: Colors.black,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(0.0),
-                labelText: 'User Name',
-                hintText: 'Full Nmae',
-                labelStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400,
+              const SizedBox(height: 40,),
+              TextField(cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(0.0),
+                  labelText: 'User Name',
+                  hintText: 'Full Nmae',
+                  labelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14.0,
+                  ),
+                  prefixIcon: const Icon(Icons.supervised_user_circle_outlined, color: Colors.black, size: 18, ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black, width: 1.5),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
-                hintStyle: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14.0,
+              ),
+              const SizedBox(height: 20,),
+              TextField(cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(0.0),
+                  labelText: 'Phone NO',
+                  hintText: 'Phone Number',
+                  labelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14.0,
+                  ),
+                  prefixIcon: const Icon(Icons.phone_android, color: Colors.black, size: 18, ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black, width: 1.5),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
-                prefixIcon: const Icon(Icons.supervised_user_circle_outlined, color: Colors.black, size: 18, ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                floatingLabelStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.black, width: 1.5),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                      ),
-                    ),
-            const SizedBox(height: 20,),
-            TextField(cursorColor: Colors.black,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(0.0),
-                labelText: 'Phone NO',
-                hintText: 'Phone Number',
-                labelStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400,
-                ),
-                hintStyle: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14.0,
-                ),
-                prefixIcon: const Icon(Icons.phone_android, color: Colors.black, size: 18, ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                floatingLabelStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.black, width: 1.5),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                      ),
-                    ),
-            const SizedBox(height: 20,),
-            TextField(cursorColor: Colors.black,
-              controller: _passwordControoler ,
-              obscureText: true,
-              decoration: InputDecoration(
-                suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
-                contentPadding: const EdgeInsets.all(0.0),
-                labelText: 'Password',
-                hintText: 'Password',
-                labelStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400,
+              ),
+              const SizedBox(height: 20,),
+              TextField(cursorColor: Colors.black,
+                controller: _passwordControoler ,
+                obscureText: true,
+                decoration: InputDecoration(
+                  suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
+                  contentPadding: const EdgeInsets.all(0.0),
+                  labelText: 'Password',
+                  hintText: 'Password',
+                  labelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
 
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14.0,
+                  ),
+                  prefixIcon: const Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black, width: 1.5),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
-                hintStyle: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14.0,
-                ),
-                prefixIcon: const Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                floatingLabelStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.black, width: 1.5),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                      ),
-                    ),
+              ),
 
-            const SizedBox(height: 20,),
-            TextField(cursorColor: Colors.black,
-              controller: _confirmpasswordControoler,
-              obscureText: true,
-              decoration: InputDecoration(
-                suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
-                contentPadding: const EdgeInsets.all(0.0),
-                labelText: 'Confirm',
-                hintText: 'Confirm Password',
-                labelStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400,
+              const SizedBox(height: 20,),
+              TextField(cursorColor: Colors.black,
+                controller: _confirmpasswordControoler,
+                obscureText: true,
+                decoration: InputDecoration(
+                  suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
+                  contentPadding: const EdgeInsets.all(0.0),
+                  labelText: 'Confirm',
+                  hintText: 'Confirm Password',
+                  labelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14.0,
+                  ),
+                  prefixIcon: const Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black, width: 1.5),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
-                hintStyle: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14.0,
-                ),
-                prefixIcon: const Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                floatingLabelStyle: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.black, width: 1.5),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                      ),
-                    ),
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -217,12 +215,12 @@ class _SignUpState extends State<SignUp> {
                     decoration: const BoxDecoration(
                         color: Color(0xffc4dde0))
                     ,
-                        //borderRadius: BorderRadius.circular(12)),
+                    //borderRadius: BorderRadius.circular(12)),
                     child: GestureDetector(
-                      onTap:(){
-                        Navigator.pushReplacement(context, MaterialPageRoute(
-                            builder: (context)=> const HomeScreen()));
-                      },
+                        onTap:(){
+                          Navigator.pushReplacement(context, MaterialPageRoute(
+                              builder: (context)=> HomeScreen(staticCustomerId: 1,)));
+                        },
                         child: Text(
                           'Sign UP',
                           style: GoogleFonts.robotoCondensed(
@@ -266,6 +264,3 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
-
-
-

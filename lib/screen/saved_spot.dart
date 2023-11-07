@@ -6,8 +6,8 @@ import '../modules/saved_ticket_contol.dart';
 import 'bookYourSpot.dart';
 
 class SavedSpot extends StatefulWidget {
-  const SavedSpot({super.key});
-
+  final int staticCustomerId;
+  const SavedSpot ({Key? key, required this.staticCustomerId}) : super(key: key);
   @override
   _SavedSpotState createState() => _SavedSpotState();
 }
@@ -22,7 +22,7 @@ class _SavedSpotState extends State<SavedSpot> {
   void initFavesTickets(customerNo) async {
     favesTickets = [];
 
-    await getCustomerFavesTickets(customerNo).then((value) {
+    await getCustomerFavesTickets(widget.staticCustomerId).then((value) {
       setState(() {
         showFavesTicket = true;
         showProcessing = false;
@@ -37,7 +37,7 @@ class _SavedSpotState extends State<SavedSpot> {
       showFavesTicket = false;
       showProcessing = true;
     });
-    await getCustomerFavesTickets(1).then((value) {
+    await getCustomerFavesTickets(widget.staticCustomerId).then((value) {
       setState(() {
         showFavesTicket = true;
         showProcessing = false;
@@ -62,7 +62,7 @@ class _SavedSpotState extends State<SavedSpot> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    initFavesTickets(1);
+    initFavesTickets(widget.staticCustomerId);
   }
 
   @override
@@ -135,7 +135,7 @@ class _SavedSpotState extends State<SavedSpot> {
                   ]),
             )
         ),
-        bottomNavigationBar: const SizedBox(height: 50, child: FluidNavBar())
+        bottomNavigationBar:  SizedBox(height: 50, child: FluidNavBar(staticCustomerId: widget.staticCustomerId,))
     );
   }
 

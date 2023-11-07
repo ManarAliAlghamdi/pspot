@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '/screen/homeScreen.dart';
+import 'screen/login.dart';
 import 'screen/reservedPage.dart';
 import 'screen/saved_spot.dart';
 
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ReservedPage(),
+      home: HomeScreen(staticCustomerId: 1),
     );
   }
 }

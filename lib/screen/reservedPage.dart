@@ -7,14 +7,15 @@ import '../modules/fluid_nav_bar.dart';
 
 
 class ReservedPage extends StatefulWidget {
-  const ReservedPage({super.key});
+  final int staticCustomerId;
+  const ReservedPage ({Key? key, required this.staticCustomerId}) : super(key: key);
 
   @override
   _ReservedPageState createState() => _ReservedPageState();
 }
 
 class _ReservedPageState extends State<ReservedPage> {
-
+  int staticCustomerId = 0;
   List<CustomerTickets> customerTickets = [];
   List<CustomerTicketDetails> customerTicketsDetails = [];
   List<CustomerTickets> filteredCustomerTickets = [];
@@ -47,7 +48,7 @@ class _ReservedPageState extends State<ReservedPage> {
       showTicket = false;
       showProcessing = true;
     });
-    await getCustomerTickets(1).then((value) {
+    await getCustomerTickets(widget.staticCustomerId).then((value) {
       setState(() {
         customerTickets = value;
         showProcessing = false;
@@ -90,11 +91,12 @@ class _ReservedPageState extends State<ReservedPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    initTickets(1);
+    initTickets(widget.staticCustomerId);
   }
 
   @override
   Widget build(BuildContext context) {
+    staticCustomerId = widget.staticCustomerId;
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -233,7 +235,7 @@ class _ReservedPageState extends State<ReservedPage> {
               ),
             )
         ),
-        bottomNavigationBar: const SizedBox(height: 50, child: FluidNavBar())
+        bottomNavigationBar:  SizedBox(height: 50, child: FluidNavBar(staticCustomerId: staticCustomerId,))
 
     );
   }

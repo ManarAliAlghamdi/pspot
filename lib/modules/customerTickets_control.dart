@@ -6,6 +6,8 @@ class CustomerTicketsControl extends StatefulWidget {
   final CustomerTickets ticketsInfo;
   const CustomerTicketsControl({Key? key, required this.ticketsInfo}) : super(key: key);
 
+
+
   @override
   State<CustomerTicketsControl> createState() => _CustomerTicketsControlState();
 }
