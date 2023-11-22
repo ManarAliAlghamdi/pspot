@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import '/screen/bookYourSpot2.dart';
 import '../models/nav_item_model.dart';
 import '../screen/Profile.dart';
-import '../screen/bookYourSpot.dart';
+import '../screen/bookYourSpot2.dart';
 import '../screen/homeScreen.dart';
 import '../screen/reservedPage.dart';
 import '../screen/saved_spot.dart';
@@ -19,7 +20,7 @@ class _FluidNavBarState extends State<FluidNavBar> {
   // int staticCustomerId = 0;
   final List<NavItem> _navItems = [
     NavItem(Icons.account_circle_outlined, "Profile"),
-    NavItem(Icons.book_outlined, "Reservations"),
+    NavItem(Icons.inventory_2_outlined, "Reservations"),
     NavItem(Icons.home, "Bitcoin"),
     NavItem(Icons.bookmark, "Bookmark"),
   ];
@@ -49,15 +50,15 @@ class _FluidNavBarState extends State<FluidNavBar> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: SizedBox(
-        height: 60.0,
+        height: 100.0,
         width: 60.0,
 
         child: FloatingActionButton(
 
           onPressed: () {
             Navigator.pushReplacement(context, MaterialPageRoute(
-                builder: (context)=> BookYourSpot(title: 'Parking Spots | Locations List', staticCustomerId: widget.staticCustomerId,)));
-          },
+                builder: (context)=> BookYourSpot2(title: 'Parking Spots | Locations List', staticCustomerId: widget.staticCustomerId,)));
+            },
           backgroundColor: Colors.amberAccent,
 
 

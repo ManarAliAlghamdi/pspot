@@ -1,8 +1,12 @@
+//import 'package:firebase_auth/firebase_auth.dart';
 import'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../models/shared_methods.dart';
+import 'Profile.dart';
 import 'homeScreen.dart';
 import 'login.dart';
-
+// import 'package:project3/screen/saved_places.dart';
 
 
 class SignUp extends StatefulWidget {
@@ -14,44 +18,28 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController();
-  final _passwordControoler = TextEditingController();
-  final _confirmpasswordControoler = TextEditingController();
-  final _usernameController = TextEditingController();
-
-  Future signup() async {
-    if (passwordConfirm()){
-      //await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: _emailController.text.trim();
-      password: _passwordControoler.text.trim();
-      //);
-      Navigator.of(context).pushNamed('/');
-    }
-  }
-  bool passwordConfirm(){
-    if (_passwordControoler.text.trim() ==
-        _confirmpasswordControoler.text.trim()){
-      return true;
-    } else {
-      return false;
-    }
-
-  }
-
-  void openSignup(){
-    Navigator.of(context).pushReplacementNamed('signup');
-  }
-  void saved(){
-    Navigator.of(context).pushReplacementNamed('saved_places');
-  }
+  final _passwordController = TextEditingController();
+  final _phonedController= TextEditingController();
+  final _firstnameController= TextEditingController();
+  final _lastnameController= TextEditingController();
+  int customerId = 0;
 
 
+Future<void> signUp(String firstName, String lastName, String email, String phoneNumber, String password)async{
+  await customerSignUp(firstName, lastName, email, phoneNumber, password).then((value){
+    setState(() {
+      customerId = value;
+    });
+  });
+}
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
-    _passwordControoler.dispose();
-    _confirmpasswordControoler.dispose();
-    _usernameController.dispose();
+    _passwordController.dispose();
+    _phonedController.dispose();
+    _lastnameController.dispose();
+    _firstnameController.dispose();
   }
 
   @override
@@ -77,10 +65,11 @@ class _SignUpState extends State<SignUp> {
               ),
               const SizedBox(height: 40,),
               TextField(cursorColor: Colors.black,
+                controller: _firstnameController,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(0.0),
-                  labelText: 'User Name',
-                  hintText: 'Full Nmae',
+                  labelText: 'First Name',
+                  hintText: 'Your first name',
                   labelStyle: const TextStyle(
                     color: Colors.black,
                     fontSize: 14.0,
@@ -107,10 +96,73 @@ class _SignUpState extends State<SignUp> {
               ),
               const SizedBox(height: 20,),
               TextField(cursorColor: Colors.black,
+                controller: _lastnameController,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(0.0),
+                  labelText: 'Last Name',
+                  hintText: 'Your last name',
+                  labelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14.0,
+                  ),
+                  prefixIcon: const Icon(Icons.supervised_user_circle_outlined, color: Colors.black, size: 18, ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black, width: 1.5),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20,),
+              TextField(cursorColor: Colors.black,
+                controller: _emailController,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(0.0),
+                  labelText: 'Email',
+                  hintText: 'example@gmail.com',
+                  labelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14.0,
+                  ),
+                  prefixIcon: const Icon(Icons.email, color: Colors.black, size: 18, ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  floatingLabelStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black, width: 1.5),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20,),
+              TextField(cursorColor: Colors.black,
+                controller: _phonedController,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(0.0),
                   labelText: 'Phone NO',
-                  hintText: 'Phone Number',
+                  hintText: '+966',
                   labelStyle: const TextStyle(
                     color: Colors.black,
                     fontSize: 14.0,
@@ -137,13 +189,13 @@ class _SignUpState extends State<SignUp> {
               ),
               const SizedBox(height: 20,),
               TextField(cursorColor: Colors.black,
-                controller: _passwordControoler ,
+                controller: _passwordController ,
                 obscureText: true,
                 decoration: InputDecoration(
                   suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
                   contentPadding: const EdgeInsets.all(0.0),
                   labelText: 'Password',
-                  hintText: 'Password',
+                  hintText: 'Enter a strong password',
                   labelStyle: const TextStyle(
                     color: Colors.black,
                     fontSize: 14.0,
@@ -154,7 +206,7 @@ class _SignUpState extends State<SignUp> {
                     color: Colors.grey,
                     fontSize: 14.0,
                   ),
-                  prefixIcon: const Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
+                  prefixIcon: const Icon(Icons.key, color: Colors.black, size: 18, ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
                     borderRadius: BorderRadius.circular(10.0),
@@ -170,46 +222,13 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
 
-              const SizedBox(height: 20,),
-              TextField(cursorColor: Colors.black,
-                controller: _confirmpasswordControoler,
-                obscureText: true,
-                decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
-                  contentPadding: const EdgeInsets.all(0.0),
-                  labelText: 'Confirm',
-                  hintText: 'Confirm Password',
-                  labelStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  hintStyle: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14.0,
-                  ),
-                  prefixIcon: const Icon(Icons.admin_panel_settings_sharp, color: Colors.black, size: 18, ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  floatingLabelStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18.0,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.black, width: 1.5),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-              ),
               const SizedBox(
                 height: 15,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: GestureDetector(
-                  onTap: saved,
+                  // onTap: ()
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: const BoxDecoration(
@@ -217,9 +236,13 @@ class _SignUpState extends State<SignUp> {
                     ,
                     //borderRadius: BorderRadius.circular(12)),
                     child: GestureDetector(
-                        onTap:(){
-                          Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (context)=> HomeScreen(staticCustomerId: 1,)));
+                        onTap:()async{
+                          await signUp(
+                              _firstnameController.text, _lastnameController.text,
+                              _emailController.text, _phonedController.text, _passwordController.text);
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context)=> UserProfile(staticCustomerId: customerId,)
+                          ));
                         },
                         child: Text(
                           'Sign UP',
@@ -264,3 +287,25 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
+
+
+
+// Future signup() async {
+//   if (passwordConfirm()){
+//     //await FirebaseAuth.instance.createUserWithEmailAndPassword(
+//     email: _emailController.text.trim();
+//     password: _passwordController.text.trim();
+//     //);
+//     Navigator.of(context).pushNamed('/');
+//   }
+// }
+// bool passwordConfirm(){
+//   var _confirmpasswordControoler;
+//   if (_passwordController.text.trim() ==
+//       _confirmpasswordControoler.text.trim()){
+//     return true;
+//   } else {
+//     return false;
+//   }
+//
+// }

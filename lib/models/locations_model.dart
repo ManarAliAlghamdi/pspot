@@ -6,16 +6,17 @@ class LocationModel {
   final String locationLogo;
   final double locationCapacity;
   final double locationAvailableSpots;
+  final int favesLocation ;
 
   LocationModel(
       {
         required this.locationId,
         required this.locationName,
         required this.locationOnMap,
-
         required this.locationLogo,
         required this.locationCapacity,
-        required this.locationAvailableSpots
+        required this.locationAvailableSpots,
+        required this.favesLocation
       });
 }
 
@@ -72,4 +73,59 @@ class ParkingSpotModel {
         required this.isSNSpot,
         required this.isSelected,
       });
+}
+
+
+class LocationParkingSpotModelOnServer{
+  final int floorId;
+  final String floorName;
+  final int sectionId ;
+  final String sectionName;
+  final int parkingSpotId;
+  final String parkingSpotDescription;
+  final String isSNSpot;
+  final String parkingSpotStatus;
+  final double spotCost;
+
+  // late bool isSelected;
+  LocationParkingSpotModelOnServer(
+      {
+        required this.floorId,
+        required this.floorName,
+        required this.sectionId,
+        required this.sectionName,
+        required this.parkingSpotId,
+        required this.parkingSpotDescription,
+        required this.isSNSpot,
+        required this.parkingSpotStatus,
+        required this.spotCost
+
+
+        // required this.isSelected,
+      });
+}
+
+class LocationParkingSpotModel {
+  final int floorId;
+  final String floorName;
+
+  final int sectionId;
+  final String sectionName;
+
+  final int parkingSpotId;
+  final String parkingSpotDirection;
+
+  final String isAvailable;
+
+
+  LocationParkingSpotModel({
+    required this.floorId,
+    required this.floorName,
+    required this.sectionId,
+    required this.sectionName,
+    required this.parkingSpotId,
+
+    required this.parkingSpotDirection,
+    required this.isAvailable
+  });
 }

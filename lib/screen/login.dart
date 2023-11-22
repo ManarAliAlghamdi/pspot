@@ -16,8 +16,7 @@ class LoginScreenState extends State<LoginScreen> {
   final _firstNameController = TextEditingController();
   final _passwordController = TextEditingController();
   int customerId = 0;
-  String firstName = '';
-  String password = '';
+
 
 void initCustomerId(String firstName, String password)async{
 
@@ -32,7 +31,6 @@ void initCustomerId(String firstName, String password)async{
   });
 }
 Future<void> _initCustomerId(String firstName, String password)async{
-
 
   await getCustomerId(firstName, password).then((value) {
     if (1 != 0){
@@ -79,11 +77,7 @@ Future<void> _initCustomerId(String firstName, String password)async{
             TextField(
               cursorColor: Colors.black,
               controller: _firstNameController,
-              onChanged: (text) {
-                setState(() {
-                  firstName = _firstNameController.text;
-                });
-              },
+
 
               decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(0.0),
@@ -113,11 +107,7 @@ Future<void> _initCustomerId(String firstName, String password)async{
               TextField(cursorColor: Colors.black,
                 controller: _passwordController,
                 obscureText: true,
-                onChanged: (text) {
-                  setState(() {
-                    password = _passwordController.text;
-                  });
-                },
+
                 decoration: InputDecoration(
                   suffixIcon: const Icon(Icons.visibility_off,color: Colors.grey,),
                   contentPadding: const EdgeInsets.all(0.0),
@@ -162,7 +152,7 @@ Future<void> _initCustomerId(String firstName, String password)async{
                       ,
                     child: GestureDetector(
                       onTap: () async{
-                       await _initCustomerId(firstName, password);
+                       await _initCustomerId(_firstNameController.text, _passwordController.text);
 
                          Navigator.push(context, MaterialPageRoute(
                              builder: (context)=> UserProfile(staticCustomerId: customerId,)

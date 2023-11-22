@@ -6,7 +6,7 @@ class CustomerTicketDetails {
   final String parkingSectionDescription;
   final String parkingFloorDescriptions;
   final String invoiceDateTime;
-  final double ticketPeriod;
+  final int ticketPeriod;
   final double parkingSpotCostPerHour;
   final double subTotal;
   final double taxAmount;

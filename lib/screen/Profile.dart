@@ -8,15 +8,32 @@ import '../modules/fluid_nav_bar.dart';
 class UserProfile extends StatefulWidget {
   final int staticCustomerId;
   const UserProfile ({Key? key, required this.staticCustomerId}) : super(key: key);
+
   @override
   _UserProfileState createState() => _UserProfileState();
 }
 
 class _UserProfileState extends State<UserProfile> {
+
   List <CustomerInformation> customerInfo = [];
+
+
   int staticCustomerId = 0;
   bool showProcessing = true;
   bool showCustomerInformation = false;
+
+
+  void intiCustomerInfo(int customerId)async {
+    customerInfo = [];
+    await getCustomerInfo(customerId).then((value) {
+      setState(() {
+        customerInfo = value;
+        showProcessing = false;
+        showCustomerInformation = true;
+      });
+    });
+  }
+
 
   void initCustomerProfile(int customerId) async {
     customerInfo = [];
@@ -28,6 +45,7 @@ class _UserProfileState extends State<UserProfile> {
       });
     });
   }
+
 
   Future<void> _refreshCustomerInformation() async {
     setState(() {
@@ -47,17 +65,13 @@ class _UserProfileState extends State<UserProfile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    initCustomerProfile(widget.staticCustomerId);
+    intiCustomerInfo(widget.staticCustomerId);
   }
 
   bool isObscurePassword = true;
-
   @override
   Widget build(BuildContext context) {
     staticCustomerId = widget.staticCustomerId;
-    print('profile: $staticCustomerId');
-
-
     return Scaffold(
       appBar: AppBar(
 
@@ -96,8 +110,7 @@ class _UserProfileState extends State<UserProfile> {
                                       onRefresh: _refreshCustomerInformation,
                                       child: ListView.builder(
                                           itemCount: customerInfo.length,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
+                                          itemBuilder: (BuildContext context, int index) {
                                             return Center(
                                               child: Container(
                                                   height: 350,
@@ -140,9 +153,12 @@ class _UserProfileState extends State<UserProfile> {
                                                                                           color: Colors
                                                                                               .black),
                                                                                     ),
+                                                                                    //[
+                                                                                    // first customer []
+                                                                                    //[]
+                                                                                    // ]
                                                                                     TextSpan(
-                                                                                      text: customerInfo[index]
-                                                                                          .customerFirstName,
+                                                                                      text: customerInfo[0].customerFirstName,
                                                                                       style: const TextStyle(
                                                                                           fontSize: 18,
                                                                                           color: Color(0xff93A7A7)
@@ -170,8 +186,7 @@ class _UserProfileState extends State<UserProfile> {
                                                                                             .black),
                                                                                   ),
                                                                                   TextSpan(
-                                                                                    text: customerInfo[index]
-                                                                                        .customerLastName,
+                                                                                    text: customerInfo[0].customerLastName,
                                                                                     style: const TextStyle(
                                                                                         fontSize: 18,
                                                                                         color: Color(
@@ -202,8 +217,7 @@ class _UserProfileState extends State<UserProfile> {
                                                                                             .black),
                                                                                   ),
                                                                                   TextSpan(
-                                                                                    text: customerInfo[index]
-                                                                                        .customerEmail,
+                                                                                    text: customerInfo[0].customerEmail,
                                                                                     style: const TextStyle(
                                                                                         fontSize: 18,
                                                                                         color: Color(
@@ -232,8 +246,7 @@ class _UserProfileState extends State<UserProfile> {
                                                                                           .black),
                                                                                 ),
                                                                                 TextSpan(
-                                                                                  text: customerInfo[index]
-                                                                                      .customerPhoneNumber,
+                                                                                  text: customerInfo[0].customerPhoneNumber,
                                                                                   style: const TextStyle(
                                                                                       fontSize: 18,
                                                                                       color: Color(
@@ -262,8 +275,7 @@ class _UserProfileState extends State<UserProfile> {
                                                                                             .black),
                                                                                   ),
                                                                                   TextSpan(
-                                                                                    text: customerInfo[index]
-                                                                                        .customerPassword,
+                                                                                    text: customerInfo[0].customerPassword,
                                                                                     style: const TextStyle(
                                                                                         fontSize: 18,
                                                                                         color: Color(

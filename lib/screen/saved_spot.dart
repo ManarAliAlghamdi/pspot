@@ -3,7 +3,7 @@ import '/models/shared_methods.dart';
 import '../models/customer_faves_models.dart';
 import '../modules/fluid_nav_bar.dart';
 import '../modules/saved_ticket_contol.dart';
-import 'bookYourSpot.dart';
+import 'bookYourSpot2.dart';
 
 class SavedSpot extends StatefulWidget {
   final int staticCustomerId;
@@ -15,6 +15,7 @@ class SavedSpot extends StatefulWidget {
 class _SavedSpotState extends State<SavedSpot> {
   bool showFavesTicket = false;
   bool showProcessing = true;
+
   List<CustomerFavesTickets> favesTickets = [];
   List<CustomerFavesTickets> filteredFavesTickets = [];
   TextEditingController searchTextField = TextEditingController();
@@ -121,7 +122,7 @@ class _SavedSpotState extends State<SavedSpot> {
                                         child: Row(
                                           children: [
                                             CustomerFavesTicketsControl(
-                                              ticketsInfo: filteredFavesTickets[index],
+                                              ticketsInfo: filteredFavesTickets[index], staticCustomerId: widget.staticCustomerId,
                                             ),
                                           ],
                                         ),

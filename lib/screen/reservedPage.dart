@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/models/shared_methods.dart';
-import '/modules/customerTicketDetails.dart';
+import '/modules/customer_ticket_details.dart';
 import '../models/customer_tickets_model.dart';
 import '../modules/customerTickets_control.dart';
 import '../modules/fluid_nav_bar.dart';
@@ -25,6 +25,7 @@ class _ReservedPageState extends State<ReservedPage> {
   bool showTicket = false;
   bool showTicketDetails = false;
   bool showProcessing = true;
+
 
   //  create the The customer tickets List from the database
   void initTickets(customerNo) async {
@@ -205,21 +206,18 @@ class _ReservedPageState extends State<ReservedPage> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: SingleChildScrollView(
                                     child: SizedBox(
-                                        height: MediaQuery
-                                            .sizeOf(context)
-                                            .height - 350,
+                                        height: MediaQuery.sizeOf(context).height - 200,
                                         child: customerTicketsDetails.isEmpty
-                                            ?  Text("$x")
-                                            :
+                                            ?  Text("$x") :
                                         SizedBox(
-                                          height: MediaQuery.of(context).size.height - 300,
-                                          width: MediaQuery.of(context).size.width - 50,
+                                          height: MediaQuery.of(context).size.height,
+                                          width: MediaQuery.of(context).size.width,
                                           child: ListView.builder(
                                               itemCount: customerTicketsDetails.length,
                                               itemBuilder: (BuildContext context, int index){
                                                 return Column(
                                                   children: [
-                                                    CustomerTicketsDetailsControl(ticketsDetailsInfo: customerTicketsDetails[0])
+                                                    CustomerTicketsDetailsControl(ticketsDetailsInfo: customerTicketsDetails[0], staticCustomerId: widget.staticCustomerId,)
                                                   ],
                                                 );
 

@@ -94,10 +94,10 @@ class _CustomerTicketsControlState extends State<CustomerTicketsControl> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(),
-                      child: IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(),
+                    //   child: IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
+                    // ),
                   ],
                 ),
               ]),

@@ -1,10 +1,10 @@
 class CustomerInformation{
-
   final String customerFirstName;
   final String customerLastName;
   final String customerEmail;
   final String customerPhoneNumber;
   final String customerPassword;
+
   final int customerId;
 
   CustomerInformation({
