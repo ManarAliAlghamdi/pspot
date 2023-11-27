@@ -24,7 +24,7 @@ class _LocationControl  extends State<LocationControl> {
   int staticCustomerId = 0;
   int locationId = 0;
   Future<void> customerAddFaves(int customerId, int locationId)async{
-    await addFaves(customerId, locationId).then((value){
+    await addLocationIntoFaves(customerId, locationId).then((value){
       setState(() {
         isFaves = true;
       });
@@ -32,7 +32,7 @@ class _LocationControl  extends State<LocationControl> {
   }
 
   Future<void> customerRemoveFaves(int customerId, int locationId)async{
-    await removeFaves(customerId, locationId).then((value){
+    await removeLocationFromFaves(customerId, locationId).then((value){
       setState(() {
         isFaves = false;
       });
@@ -49,7 +49,6 @@ class _LocationControl  extends State<LocationControl> {
         isFaves = true;
       });
     }
-
     return GestureDetector(
       child: Container(
         child: Column(
@@ -65,9 +64,7 @@ class _LocationControl  extends State<LocationControl> {
 
                 child: FittedBox(
                   fit: BoxFit.fill,
-                  child: Image.asset(
-                    locationInfo!.locationLogo,
-                  ),
+                  child: Image.asset(locationInfo!.locationLogo,),
                 ),
               ),
             ),

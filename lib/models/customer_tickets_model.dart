@@ -1,4 +1,4 @@
-class CustomerTicketDetails {
+class CustomerInvoiceDetails {
   final String locationLogo;
   final String locationName;
   final int invoiceId;
@@ -16,7 +16,7 @@ class CustomerTicketDetails {
   final int invoiceNo;
 
 
-  CustomerTicketDetails({
+  CustomerInvoiceDetails({
     required this.locationLogo,
     required this.locationName,
     required this.invoiceId,
@@ -37,7 +37,7 @@ class CustomerTicketDetails {
 });
 
 }
-class CustomerTickets{
+class CustomerInvoices{
   final String locationLogo;
   final String locationName;
   final String parkingSpotNumber;
@@ -46,7 +46,7 @@ class CustomerTickets{
   final int customerNo;
 
 
-  CustomerTickets({
+  CustomerInvoices({
     required this.locationLogo,
     required this.locationName,
     required this.parkingSpotNumber,

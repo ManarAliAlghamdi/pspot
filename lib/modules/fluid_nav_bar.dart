@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '/screen/bookYourSpot2.dart';
+import 'package:pspot_test/screen/bookYourSpot.dart';
 import '../models/nav_item_model.dart';
 import '../screen/Profile.dart';
-import '../screen/bookYourSpot2.dart';
+
 import '../screen/homeScreen.dart';
-import '../screen/reservedPage.dart';
-import '../screen/saved_spot.dart';
+import '../screen/invoices.dart';
+import '../screen/customer_faves_locations.dart';
 
 class FluidNavBar extends StatefulWidget {
   final int staticCustomerId;
@@ -17,7 +17,6 @@ class FluidNavBar extends StatefulWidget {
 
 class _FluidNavBarState extends State<FluidNavBar> {
   int _selectedIndex = 0;
-  // int staticCustomerId = 0;
   final List<NavItem> _navItems = [
     NavItem(Icons.account_circle_outlined, "Profile"),
     NavItem(Icons.inventory_2_outlined, "Reservations"),
@@ -34,7 +33,7 @@ class _FluidNavBarState extends State<FluidNavBar> {
       } else
         if (index == 1) {
         Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) =>  ReservedPage(staticCustomerId: widget.staticCustomerId,)));
+            builder: (context) =>  CustomerInvoice(staticCustomerId: widget.staticCustomerId,)));
       } else if (index == 2) {
         Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (context) => HomeScreen(staticCustomerId: widget.staticCustomerId,)));
@@ -50,26 +49,23 @@ class _FluidNavBarState extends State<FluidNavBar> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: SizedBox(
-        height: 100.0,
-        width: 60.0,
-
+        height: 90.0,
+        width: 50.0,
         child: FloatingActionButton(
 
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(
-                builder: (context)=> BookYourSpot2(title: 'Parking Spots | Locations List', staticCustomerId: widget.staticCustomerId,)));
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context)=> BookYourSpot(title: 'Parking Spots | Locations List', staticCustomerId: widget.staticCustomerId, dateOrLocation: 'locations', locationIdFromFaves: 0, locationLogo: '', locationName: '',)));
             },
           backgroundColor: Colors.amberAccent,
-
-
           child: Container(
-              height: 60,
-              width: 60,
+              height: 40,
+              width: 40,
               decoration: const BoxDecoration(
-                shape: BoxShape.circle,
+                shape: BoxShape.rectangle,
               ),
               child: const Icon(Icons.pin_drop_outlined,
-                  size: 40.0,
+                  size: 30.0,
                   color: Color(0xff2D2727)
               )
           ),
@@ -91,19 +87,20 @@ class _FluidNavBarState extends State<FluidNavBar> {
               children: [
                 const SizedBox(width: 10,),
                 SizedBox(
-                  width: 50,
+                  width: 65,
+                  height: 40,
                   child: IconButton(
                     onPressed: () => _onNavItemTapped(index),
                     icon: Icon(
                       item.icon,
                       color:  Colors.white ,
-                      size: 35,
+                      size: 40,
                     ),
                   ),
                 ),
 
-                
-                const SizedBox(width: 20,),
+
+                const SizedBox(width: 10,),
               ],
             );
           }).toList(),

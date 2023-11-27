@@ -4,7 +4,6 @@ class CustomerInformation{
   final String customerEmail;
   final String customerPhoneNumber;
   final String customerPassword;
-
   final int customerId;
 
   CustomerInformation({

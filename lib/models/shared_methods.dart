@@ -151,17 +151,26 @@ Future<List<LocationModel>> getLocations(int customerId) async {
 
 Future<List<CustomerInformation>> getCustomerInfo(int customerID) async{
   List<CustomerInformation> customerInfo = [];
+
   try{
     String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_getCustomersInformation&conncectionStringInWebConfig=pSpotconnection";
+
     List userData = [];
+
     Uri finalUri = Uri.parse(uri);
+
     await http.post(finalUri, body: {
+
       'P1': '@customerId',
-      'PV1': customerID.toString(),}
+      'PV1': customerID.toString(),
+
+    }
     ).then((value) {
+
       userData = jsonDecode(value.body);
 
       if (userData.isNotEmpty) {
+
        customerInfo.add(
            CustomerInformation(
           customerFirstName: userData[0]["R1"],
@@ -169,6 +178,7 @@ Future<List<CustomerInformation>> getCustomerInfo(int customerID) async{
            customerEmail: userData[0]["R3"],
            customerPhoneNumber:userData[0]["R4"],
            customerPassword: userData[0]["R5"],
+
            customerId: customerID
            ));
         }
@@ -287,21 +297,29 @@ async {
 }
 
 
-Future<List<CustomerFavesTickets>> getCustomerFavesTickets(int customerId)async {
-  List<CustomerFavesTickets> customerFavesTickets = [];
+Future<List<CustomerFavesLocations>> getCustomerFavesLocations(int customerId)async {
+
+  List<CustomerFavesLocations> customerFavesLocations = [];
+
   try {
-    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerFavesTickets&conncectionStringInWebConfig=pSpotconnection";
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerFavesLocations&conncectionStringInWebConfig=pSpotconnection";
     List userData = [];
+
     Uri finalUri = Uri.parse(uri);
+
     await http.post(finalUri, body: {
+
       'P1': '@customerId',
       'PV1': customerId.toString(),
+
     }).then((value) {
+
       userData = jsonDecode(value.body);
+
       if (userData.isNotEmpty) {
         for (int i = 0; i < userData.length; i++) {
-          customerFavesTickets.add(
-              CustomerFavesTickets(
+          customerFavesLocations.add(
+              CustomerFavesLocations(
                 locationLogo: 'assets/images/${userData[i]["R1"]}',
                 locationName: userData[i]["R2"],
                 locationId: int.parse(userData[i]["R3"]),
@@ -311,16 +329,16 @@ Future<List<CustomerFavesTickets>> getCustomerFavesTickets(int customerId)async 
         }
       }
     });
-    return customerFavesTickets;
+    return customerFavesLocations;
   } catch (ex) {
-    print("something went wrong! in getting the tickets");
-    return customerFavesTickets;
+    print("something went wrong! in getting the faves Locations");
+    return customerFavesLocations;
   }
 }
-Future<List<CustomerTicketDetails>> getCustomerTicketDetails(int invoiceNo) async {
-  List<CustomerTicketDetails> ticketsDetailsList = [];
+Future<List<CustomerInvoiceDetails>> getCustomerInvoiceDetails(int invoiceNo) async {
+  List<CustomerInvoiceDetails> invoiceDetailsList = [];
   try {
-    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerTicketDetails&conncectionStringInWebConfig=pSpotconnection";
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerInvoiceDetails&conncectionStringInWebConfig=pSpotconnection";
     List userData = [];
     Uri finalUri = Uri.parse(uri);
     await http.post(finalUri, body: {
@@ -330,8 +348,8 @@ Future<List<CustomerTicketDetails>> getCustomerTicketDetails(int invoiceNo) asyn
       userData = jsonDecode(value.body);
       if (userData.isNotEmpty) {
         for (int i = 0; i < userData.length; i++) {
-          ticketsDetailsList.add(
-              CustomerTicketDetails(
+          invoiceDetailsList.add(
+              CustomerInvoiceDetails(
                   locationLogo: 'assets/images/${userData[i]["R1"]}',
                   locationName: userData[i]["R2"],
                   invoiceId: int.parse(userData[i]["R3"]),
@@ -350,21 +368,21 @@ Future<List<CustomerTicketDetails>> getCustomerTicketDetails(int invoiceNo) asyn
         }
       }
     });
-    return ticketsDetailsList;
+    return invoiceDetailsList;
   }
   catch (ex) {
-    return ticketsDetailsList;
+    return invoiceDetailsList;
   }
 }
-Future<int> getCustomerId(String customerFirstName, String password)async{
+Future<int> getCustomerId(String customerPhoneNumber, String password)async{
   int customerId = 0;
   try{
     String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_customerLogin&conncectionStringInWebConfig=pSpotconnection";
     List userData = [];
     Uri finalUri = Uri.parse(uri);
     await http.post(finalUri, body: {
-      "P1": "@customerFirstName",
-      "PV1": customerFirstName.toString(),
+      "P1": "@phoneNumber",
+      "PV1": customerPhoneNumber.toString(),
 
       "P2": "@password",
       "PV2": password.toString(),
@@ -458,11 +476,11 @@ Future<List<CustomerInformation>> getCustomerInformation(int customerId)async{
 
   }
 }
-Future<List<CustomerTickets>> getCustomerTickets(int customerNo)async{
+Future<List<CustomerInvoices>> getCustomerInvoices(int customerNo)async{
 
-  List<CustomerTickets> ticketsList = [];
+  List<CustomerInvoices> invoicesList = [];
   try{
-    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerTickets&conncectionStringInWebConfig=pSpotconnection";
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerInvoices&conncectionStringInWebConfig=pSpotconnection";
     List userData = [];
     Uri finalUri = Uri.parse(uri);
     await http.post(finalUri, body: {
@@ -472,8 +490,8 @@ Future<List<CustomerTickets>> getCustomerTickets(int customerNo)async{
       userData = jsonDecode(value.body);
       if (userData.isNotEmpty) {
         for (int i = 0; i < userData.length; i++) {
-          ticketsList.add(
-              CustomerTickets(
+          invoicesList.add(
+              CustomerInvoices(
                 locationLogo: 'assets/images/${userData[i]["R1"]}',
                 locationName: userData[i]["R2"],
                 parkingSpotNumber: userData[i]["R3"],
@@ -484,18 +502,21 @@ Future<List<CustomerTickets>> getCustomerTickets(int customerNo)async{
         }
       }
     });
-    return ticketsList;
+    return invoicesList;
   }catch(ex){
-    return ticketsList;
+    return invoicesList;
   }
 }
-Future<void> addFaves(int customerId, int locationId)async{
+
+Future<void> addLocationIntoFaves(int customerId, int locationId)async{
+
   try {
-    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_insertIntoCustomersFavesTbl&conncectionStringInWebConfig=pSpotconnection";
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_insertLocationIntoFaves&conncectionStringInWebConfig=pSpotconnection";
 
     List userData = [];
     Uri finalUri = Uri.parse(uri);
     await http.post(finalUri, body: {
+
       'P1': '@customerId',
       'PV1': customerId.toString(),
       'P2': '@locationId',
@@ -515,9 +536,9 @@ Future<void> addFaves(int customerId, int locationId)async{
 
 
 }
-Future<void> removeFaves(int customerId, int locationId)async{
+Future<void> removeLocationFromFaves(int customerId, int locationId)async{
   try {
-    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_removeFromFavesTickets&conncectionStringInWebConfig=pSpotconnection";
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_deleteLocationFromFaves&conncectionStringInWebConfig=pSpotconnection";
     List userData = [];
     Uri finalUri = Uri.parse(uri);
     await http.post(finalUri, body: {
@@ -542,33 +563,73 @@ Future<void> removeFaves(int customerId, int locationId)async{
 
 
 
-Future<void> reserveParkingSpot(int spotId, int customerId, String ticketsDateAndTime, int requiredPeriod)async{
-try{
-  String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_ReservParkingSpots&conncectionStringInWebConfig=pSpotconnection";
-  List userData = [];
-  Uri finalUri = Uri.parse(uri);
-  await http.post(finalUri, body: {
-    'P1': '@spotId',
-    'PV1': spotId.toString(),
+Future<String> reserveParkingSpot(int spotId, int customerId, String ticketsDateAndTime, int requiredPeriod, double totalCost)async {
+  String reserveState = '';
+  try {
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_ReservParkingSpotByLocations&conncectionStringInWebConfig=pSpotconnection";
+    List userData = [];
+    Uri finalUri = Uri.parse(uri);
+    await http.post(finalUri, body: {
+      'P1': '@spotId',
+      'PV1': spotId.toString(),
 
-    'P2': '@customerId',
-    'PV2': customerId.toString(),
+      'P2': '@customerId',
+      'PV2': customerId.toString(),
 
-    'P3': '@requriredDateAndTime',
-    'PV3': ticketsDateAndTime.toString(),
+      'P3': '@requriredDateAndTime',
+      'PV3': ticketsDateAndTime.toString(),
 
-    'P4': '@requiredPeriod',
-    'PV4': requiredPeriod.toString()
-  }).then((value){
-    userData = jsonDecode(value.body);
-    if(userData.isNotEmpty){
-      if(userData[0]["R1"] == "done") {
-        print("deleting all done");}
-      else if(userData[0]["R1"] == "exists") {
-        print("there is already a reservation ");}
-    }
-  });
-  }catch(ex){
-  print("object");
+      'P4': '@requiredPeriod',
+      'PV4': requiredPeriod.toString(),
+
+      'P5': '@totalCost',
+      'PV5': totalCost.toString()
+    }).then((value) {
+      userData = jsonDecode(value.body);
+      if (userData.isNotEmpty) {
+       reserveState = userData[0]["R1"] ;
+      }
+    });
+    return reserveState;
+  } catch (ex) {
+    print("object");
+    return reserveState;
+  }
 }
+
+Future<List<LocationLogo>> getLocationLogo ()async{
+  List<LocationLogo> locationsLogo = [];
+
+  try{
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetLocationLogo&conncectionStringInWebConfig=pSpotconnection";
+    List userData = [];
+
+    Uri finalUri = Uri.parse(uri);
+
+    await http.post(finalUri, body: { }).then((value){
+
+      userData = jsonDecode(value.body);
+
+      if (userData.isNotEmpty) {
+
+        for(int i = 0; i< userData.length; i++){
+          locationsLogo.add(
+              LocationLogo(
+                locationId: int.parse(userData[i]["R1"]),
+                locationLogo: 'assets/images/${userData[i]["R2"]}',
+                locationName: userData[i]["R3"],
+          )
+          );
+        }
+      }
+    });
+    print('getting locations logo were success! d:');
+
+    return locationsLogo;
+  }catch(ex){
+
+print('there is problem in getting locations logo :(');
+    return locationsLogo;
+  }
+
 }

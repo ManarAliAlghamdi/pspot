@@ -4,6 +4,7 @@ import 'homeScreen.dart';
 
 class DonePage extends StatefulWidget {
   final int staticCustomerId;
+
   const DonePage ({Key? key, required this.staticCustomerId}) : super(key: key);
 
   @override
@@ -22,12 +23,12 @@ class _DonePageState extends State<DonePage> {
           children: <Widget>[
             Image.asset(
               'assets/images/done.jpeg',
-              width: 400,
-              height: 400,
+              width: 200,
+              height: 200,
             ),
             const SizedBox(height: 16),
             const Text(
-              'You have been booked your \n parking spots successfully',
+              'You Reservation have been booked successfully',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24,

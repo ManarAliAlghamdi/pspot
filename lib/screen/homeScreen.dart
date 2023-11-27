@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '/modules/location_logo_control.dart';
+import '/screen/bookYourSpot.dart';
+import '../models/customer_faves_models.dart';
 import '../models/locations_model.dart';
 import '../models/shared_methods.dart';
 import '../modules/fluid_nav_bar.dart';
-import '../modules/loaction_control.dart';
 
 class HomeScreen extends StatefulWidget {
   final int staticCustomerId;
@@ -14,66 +15,49 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<LocationParkingSpotModelOnServer> floorsList = [
-  //   LocationParkingSpotModelOnServer(floorId: 1,floorName: 'floor1',sectionId: 1,sectionName: 'section_1',parkingSpotId: 1,parkingSpotDescription: 'spot_1',parkingSpotStatus: true,parkingSpotSectionNo: 1,parkingSpotDirection: 'right',isSNSpot: 'yes',isSelected: false),
-  //   LocationParkingSpotModelOnServer(floorId: 1,floorName: 'floor1',sectionId: 1,sectionName: 'section_1',parkingSpotId: 2,parkingSpotDescription: 'spot_2',parkingSpotStatus: true,parkingSpotSectionNo: 1,parkingSpotDirection: 'right',isSNSpot: 'yes',isSelected: false),
-  //   LocationParkingSpotModelOnServer(floorId: 1,floorName: 'floor1',sectionId: 2,sectionName: 'section_1',parkingSpotId: 3,parkingSpotDescription: 'spot_3',parkingSpotStatus: true,parkingSpotSectionNo: 1,parkingSpotDirection: 'right',isSNSpot: 'yes',isSelected: false),
-  //   LocationParkingSpotModelOnServer(floorId: 1,floorName: 'floor1',sectionId: 2,sectionName: 'section_1',parkingSpotId: 4,parkingSpotDescription: 'spot_4',parkingSpotStatus: true,parkingSpotSectionNo: 1,parkingSpotDirection: 'right',isSNSpot: 'yes',isSelected: false),
-  //   LocationParkingSpotModelOnServer(floorId: 2,floorName: 'floor2',sectionId: 3,sectionName: 'section_3',parkingSpotId: 5,parkingSpotDescription: 'spot_5',parkingSpotStatus: true,parkingSpotSectionNo: 1,parkingSpotDirection: 'right',isSNSpot: 'yes',isSelected: false),
-  //   LocationParkingSpotModelOnServer(floorId: 2,floorName: 'floor2',sectionId: 3,sectionName: 'section_3',parkingSpotId: 6,parkingSpotDescription: 'spot_6',parkingSpotStatus: true,parkingSpotSectionNo: 1,parkingSpotDirection: 'right',isSNSpot: 'yes',isSelected: false),
-   ];
+
+  List<LocationLogo> locationLogoList = [];
+  List<CustomerFavesLocations> favesLocations = [];
 
   List<LocationModel> locationsList = [];
   bool showProcessing = true;
   bool showHome = false;
+
+  bool showLoading = true;
+  bool stopLoading = false;
   List<String> test= ['assets/images/blvd.png','assets/images/blvd.png','assets/images/blvd.png'];
   // List<LocationModel> filteredLocationsList = [];
-  void initLocations(int customerId) async {
-    locationsList = [];
-    setState(() {
-      showProcessing = true;
-      showHome = false;
-    });
-    await getLocations(customerId).then((value) {
 
-      setState(() {
-        locationsList = value;
-        showProcessing = false;
-        showHome = true;
-      });
-    });
-  }
+
+  // Future<void> initFavesLocations(customerNo) async {
+  //   favesLocations = [];
+  //   await getCustomerFavesLocations(customerNo).then((value) {
+  //     setState(() {
+  //       favesLocations = value;
+  //       showLoading = false;
+  //       stopLoading = true;
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    initLocations(widget.staticCustomerId);
+    // initFavesLocations(widget.staticCustomerId);
+    getLocationSLogo();
   }
 
-  Future<void> _refreshLocations() async {
-    setState(() {
-      showHome = false;
-      showProcessing = true;
-    });
-    await getLocations(widget.staticCustomerId).then((value) {
+
+  void getLocationSLogo() async {
+    await getLocationLogo().then((value){
       setState(() {
-        locationsList = value;
+        locationLogoList = value;
         showProcessing = false;
         showHome = true;
       });
     });
   }
-
-  // List<String> getLocationsLogo(){
-  //   List<String> locationsLogo= [];
-  //   for (int x = 1; x > locationsList.length; x++){
-  //
-  //   }
-  //   return locationsLogo;
-  //
-  // }
-
 
   @override
   Widget build(BuildContext context) {
@@ -139,49 +123,56 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Container(
                                   height: 150,
                                   child: ListView.builder(
-                                    itemCount: locationsList.length,
+                                    itemCount: locationLogoList.length,
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
-                                      return Locatioin_Logo_Control(location: locationsList[index]
-                                      );
+                                      return GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context, MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BookYourSpot(title: 'title',
+                                                      staticCustomerId: widget
+                                                          .staticCustomerId,
+                                                      dateOrLocation: 'date',
+                                                      locationIdFromFaves: locationLogoList[index]
+                                                          .locationId,
+                                                      locationLogo: locationLogoList[index]
+                                                          .locationLogo,
+                                                      locationName: locationLogoList[index]
+                                                          .locationName
+
+                                                  ),
+                                            )
+                                            );
+                                          },
+                                          child:Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: SizedBox(
+                                              width: 100,
+                                              child: Image.asset(locationLogoList[index].locationLogo),
+
+                                            ),
+                                          ));
                                     },
                                   ),
                                 ),
                                 const SizedBox(
                                   height: 25,
-                                  child: Text('My Saved Places',
+                                  child: Text('My Favorite Locations',
                                     style: TextStyle(fontSize: 15,
                                         fontWeight: FontWeight.bold),),
                                 ),
-                                Center(
+                                SingleChildScrollView(
                                   child:
                                   Container(
                                     height: 250,
                                     child: ListView.builder(
-                                      itemCount: locationsList.length,
+                                      itemCount: locationLogoList.length,
                                       scrollDirection: Axis.vertical,
                                       itemBuilder: (context, index) {
-                                        return Locatioin_Logo_Control(location: locationsList[index]
-                                        );
+                                        return LocationsLogoControl(staticCustomerId: widget.staticCustomerId, theIndex: index, showLoading: showLoading, stopLoading: stopLoading,);
                                       },
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 25,
-                                  child: Text('Spots List',
-                                    style: TextStyle(fontSize: 15,
-                                        fontWeight: FontWeight.bold),),
-                                ),
-                                Center(
-                                  child:
-                                  SingleChildScrollView(
-                                    child: SizedBox(
-                                      height: 250,
-                                      child:
-                                     SingleChildScrollView(
-                                          // child: Floor_List_Control(floorsList: floorsList,)
-                                     ),
                                     ),
                                   ),
                                 ),
@@ -192,38 +183,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ]))),
-      bottomNavigationBar: SizedBox(height: 60,
+      bottomNavigationBar: SizedBox(height: 70,
           child: FluidNavBar(staticCustomerId: widget.staticCustomerId,)),
 
-    );
-  }
-
-
-  Widget famousPlaces(Image, {required int ImageSize}) {
-    return AspectRatio(aspectRatio: 2.55 / 3,
-      child: Container(
-        margin: EdgeInsets.only(right: 15.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-              fit: BoxFit.contain,
-              image: AssetImage(Image)
-          ),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(
-                begin: Alignment.bottomRight,
-                stops: const [0.1, 0.9],
-                colors: [
-                  Colors.black.withOpacity(.0),
-                  Colors.black.withOpacity(.0)
-                ]
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

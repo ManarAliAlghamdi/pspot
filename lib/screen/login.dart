@@ -18,9 +18,9 @@ class LoginScreenState extends State<LoginScreen> {
   int customerId = 0;
 
 
-void initCustomerId(String firstName, String password)async{
+void initCustomerId(String phoneNumber, String password)async{
 
-  await getCustomerId(firstName, password).then((value) {
+  await getCustomerId(phoneNumber, password).then((value) {
     if (1 != 0){
       print(value);
     }
@@ -39,9 +39,9 @@ Future<void> _initCustomerId(String firstName, String password)async{
       customerId = value;
   });
 }
+
 //   @override
 //   void dispose() async{
-//
 //    super.dispose();
 //     _firstNameController.dispose();
 //     _passwordController.dispose();
@@ -155,7 +155,7 @@ Future<void> _initCustomerId(String firstName, String password)async{
                        await _initCustomerId(_firstNameController.text, _passwordController.text);
 
                          Navigator.push(context, MaterialPageRoute(
-                             builder: (context)=> UserProfile(staticCustomerId: customerId,)
+                             builder: (context)=> HomeScreen(staticCustomerId: customerId,)
                          ));
 
 

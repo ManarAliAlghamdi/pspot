@@ -6,6 +6,7 @@ import '/models/shared_methods.dart';
 import '../modules/fluid_nav_bar.dart';
 
 class UserProfile extends StatefulWidget {
+
   final int staticCustomerId;
   const UserProfile ({Key? key, required this.staticCustomerId}) : super(key: key);
 
@@ -310,36 +311,7 @@ class _UserProfileState extends State<UserProfile> {
         ),
 
       ),
-      bottomNavigationBar: SizedBox(height: 100, child: FluidNavBar(staticCustomerId: staticCustomerId,)),
+      bottomNavigationBar: SizedBox(height: 70, child: FluidNavBar(staticCustomerId: staticCustomerId,)),
     );
   }
 }
-
-//   Widget buildTextField(
-//       String labelText, String placeholder, bool isPasswordTextField) {
-//     return Padding(
-//       padding: const EdgeInsets.only(bottom: 30),
-//       child: TextField(
-//         obscureText: isPasswordTextField ? isObscurePassword : false,
-//         decoration: InputDecoration(
-//
-//             suffixIcon: isPasswordTextField
-//                 ? IconButton(
-//                     icon: const Icon(Icons.remove_red_eye, color: Colors.grey),
-//                     onPressed: () {
-//                       setState(() {
-//                         isObscurePassword = !isObscurePassword;
-//                       });
-//                     })
-//                 : null,
-//             contentPadding: const EdgeInsets.only(bottom: 5),
-//             labelText: labelText,
-//             floatingLabelBehavior: FloatingLabelBehavior.always,
-//             hintText: placeholder,
-//             hintStyle: const TextStyle(
-//                 fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey)
-//         ),
-//       ),
-//     );
-//   }
-// }

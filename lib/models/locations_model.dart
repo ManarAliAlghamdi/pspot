@@ -129,3 +129,17 @@ class LocationParkingSpotModel {
     required this.isAvailable
   });
 }
+
+class LocationLogo{
+  final int locationId;
+  final String locationLogo;
+  final String locationName;
+
+
+  LocationLogo({
+    required this.locationId,
+    required this.locationLogo,
+    required this.locationName
+
+});
+}

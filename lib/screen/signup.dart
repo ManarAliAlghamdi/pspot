@@ -26,20 +26,24 @@ class _SignUpState extends State<SignUp> {
 
 
 Future<void> signUp(String firstName, String lastName, String email, String phoneNumber, String password)async{
+
   await customerSignUp(firstName, lastName, email, phoneNumber, password).then((value){
     setState(() {
       customerId = value;
     });
   });
 }
+
   @override
   void dispose() {
+
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _phonedController.dispose();
     _lastnameController.dispose();
     _firstnameController.dispose();
+
   }
 
   @override

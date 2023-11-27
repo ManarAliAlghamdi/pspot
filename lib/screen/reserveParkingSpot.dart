@@ -1,58 +1,73 @@
 import 'package:flutter/material.dart';
-import '/models/shared_methods.dart';
+import 'package:pspot_test/models/shared_methods.dart';
+import '../modules/customer_invoice_details.dart';
+import '../modules/customer_tickets_summary_delete.dart';
 import '../modules/fluid_nav_bar.dart';
+import '/modules/floor_list_control.dart';
 import '../models/locations_model.dart';
+import 'payment_page.dart';
 
 class ReserveParkingSpot extends StatefulWidget {
   final int locationId;
   final int staticCustomerId;
   final String dateRev;
   final int period;
-  const ReserveParkingSpot({super.key, required this.staticCustomerId, required this.dateRev, required this.locationId, required this.period});
+  final String locationName;
+  final String locationLogo;
+  const ReserveParkingSpot({super.key, required this.staticCustomerId, required this.dateRev, required this.locationId, required this.period, required this.locationName, required this.locationLogo});
 
   @override
   State<ReserveParkingSpot> createState() => _ReserveParkingSpot();
 }
 
 class _ReserveParkingSpot extends State<ReserveParkingSpot> {
-
-  List<LocationParkingSpotModelOnServer> floorsList = [];
+  List<LocationParkingSpotModelOnServer> spotsList = [];
   bool showProcessing = true;
   bool showTable = false;
+  bool showDetails = false;
+  String ticketId = '';
+  int ticketsIndex = 0;
 
-  void initParkingSpot(int locationId, int customerId,
-      String requriredDateAndTime, int requiredPeriod) async {
-    floorsList = [];
+  String spotDes = '';
+  String sectionDes = '';
+  String floorDes = '';
+
+  void initParkingSpot(int locationId, int customerId, String requriredDateAndTime, int requiredPeriod) async {
+    setState(() {
+      showTable = false;
+      showDetails = false;
+      showProcessing = true;
+    });
+    spotsList = [];
     await getAvailableSpotsByLocation(
-        locationId, customerId, requriredDateAndTime, requiredPeriod).then((
-        value) {
+        locationId, customerId, requriredDateAndTime, requiredPeriod).then((value) {
       setState(() {
-        floorsList = value;
+        spotsList = value;
         showProcessing = false;
         showTable = true;
       });
     });
   }
-
   int rowsCount = 0;
 
   @override
   void initState() {
     super.initState();
-    initParkingSpot(widget.locationId, widget.staticCustomerId, widget.dateRev,
-        widget.period);
+    initParkingSpot(widget.locationId, widget.staticCustomerId, widget.dateRev, widget.period);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Book Your Tickets To \n${widget.locationName}',
+          style: const TextStyle(fontSize: 15),),
+        backgroundColor: const Color(0xffC4DFDF),
 
-        title: const Text('Book Your Tickets'),
-        backgroundColor: const Color(0xffC4DFDF),),
+      ),
 
       body: Container(
-          margin: const EdgeInsets.only(top: 10.0),
+          margin: const EdgeInsets.only(top: 20.0),
           child: SingleChildScrollView(
               child: Center(
                   child: SizedBox(
@@ -69,28 +84,31 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                             Visibility(
                               visible: showTable,
                               child: Container(
+
                                   height: MediaQuery
                                       .sizeOf(context)
-                                      .height - 200,
+                                      .height - 208,
                                   child: ListView.builder(
-                                    itemCount: floorsList.length,
+                                    itemCount: spotsList.length,
                                     scrollDirection: Axis.vertical,
                                     itemBuilder: (context, index) {
                                       return Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () {
-                                            if (floorsList[index]
+                                            if (spotsList[index]
                                                 .parkingSpotStatus == 'No') {
                                               AlertDialog alert = AlertDialog(
-                                                title: const Text("Sorry, The Spot not Available"),
+                                                title: const Text(
+                                                    "Sorry, The Spot not Available"),
                                                 content: const Text(
                                                     "Please choose Another Spot"),
                                                 actions: [
                                                   Center(child: ElevatedButton(
                                                       onPressed: () {
                                                         Navigator.of(context)
-                                                            .pop();},
+                                                            .pop();
+                                                      },
                                                       child: const Text("OK"),
                                                       style: ElevatedButton
                                                           .styleFrom(
@@ -100,11 +118,29 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                                   )
                                                 ],
                                               );
-                                              showDialog(context: context, builder: (BuildContext context){return alert;},);
+                                              showDialog(context: context,
+                                                builder: (
+                                                    BuildContext context) {
+                                                  return alert;
+                                                },);
                                               print('no');
                                             } else {
-
-
+                                              setState(() {
+                                                showDetails = true;
+                                                showTable = false;
+                                                ticketsIndex = index;
+                                                spotDes = spotsList[index].parkingSpotDescription;
+                                                sectionDes = spotsList[index].sectionName;
+                                                floorDes = spotsList[index].floorName;
+                                                ticketsIndex = index;
+                                              });
+                                              Navigator.push(context, MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PaymentPageEdited(staticCustomerId: widget.staticCustomerId, locationLogo: widget.locationLogo,
+                                                        locationName: widget.locationName, ticketSpotInfo: spotsList[index], resDate: widget.dateRev,
+                                                        period: widget.period, locationID: widget.locationId,
+                                                      )
+                                              ));
                                               print('yes');
                                             }
                                           },
@@ -131,7 +167,7 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                                                       .black)
                                                           ),
                                                           child: Text(
-                                                              floorsList[index]
+                                                              spotsList[index]
                                                                   .floorName,
                                                               textAlign: TextAlign
                                                                   .center)),
@@ -152,7 +188,7 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                                                       .black)
                                                           ),
                                                           child: Text(
-                                                            floorsList[index]
+                                                            spotsList[index]
                                                                 .sectionName,
                                                             textAlign: TextAlign
                                                                 .center,)),
@@ -170,12 +206,11 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                                               border: Border
                                                                   .all(
                                                                   color: Colors
-                                                                      .black)
-                                                          ),
+                                                                      .black)),
                                                           child:
                                                           FittedBox(
                                                               fit: BoxFit.fill,
-                                                              child: floorsList[index]
+                                                              child: spotsList[index]
                                                                   .parkingSpotStatus ==
                                                                   'Yes'
                                                                   ? const Icon(
@@ -205,7 +240,7 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                                               fit: BoxFit.fill,
                                                               child: Icon(Icons
                                                                   .wheelchair_pickup_sharp,
-                                                                color: floorsList[index]
+                                                                color: spotsList[index]
                                                                     .isSNSpot ==
                                                                     'yes'
                                                                     ? Colors
@@ -229,7 +264,7 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                                                       .black)
                                                           ),
                                                           child: Text(
-                                                            floorsList[index]
+                                                            spotsList[index]
                                                                 .parkingSpotDescription,
                                                             textAlign: TextAlign
                                                                 .center,)),
@@ -249,11 +284,10 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                                                       .black)
                                                           ),
                                                           child: Text(
-                                                            "${floorsList[index]
+                                                            "${spotsList[index]
                                                                 .spotCost} SR",
                                                             textAlign: TextAlign
                                                                 .center,)),
-
                                                     ],
                                                   )
                                                 ],
@@ -266,14 +300,30 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                     },
                                   )
                               ),
-                            )
+                            ),
+                            // Visibility(
+                            //     visible: showDetails,
+                            //     child: Container(
+                            //       height: 200,
+                            //       child: SingleChildScrollView(
+                            //         child: Column(
+                            //           children: [
+                            //             PaymentPageEdited(staticCustomerId: widget.staticCustomerId,
+                            //               locationLogo: widget.locationLogo, locationName: widget.locationName, ticketSpotInfo: spotsList[ticketsIndex], resDate: widget.dateRev, period: widget.period,
+                            //             )
+                            //           ],
+                            //         ),
+                            //
+                            //       ),
+                            //     )
+                            // )
                           ]
                       )
                   )
               )
           )
       ),
-      bottomNavigationBar: SizedBox(height: 100,
+      bottomNavigationBar: SizedBox(height: 70,
           child: FluidNavBar(staticCustomerId: widget.staticCustomerId,)),
 
     );
