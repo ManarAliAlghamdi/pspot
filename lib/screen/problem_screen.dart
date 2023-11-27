@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pspot_test/screen/reserveParkingSpot.dart';
+import '/screen/reserveParkingSpot.dart';
 
 import 'homeScreen.dart';
 

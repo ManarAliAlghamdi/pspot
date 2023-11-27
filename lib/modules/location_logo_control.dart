@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pspot_test/models/locations_model.dart';
+import '/models/locations_model.dart';
 
 import '../models/customer_faves_models.dart';
 import '../models/shared_methods.dart';

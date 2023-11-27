@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pspot_test/modules/spots_list_control.dart';
+import '/modules/spots_list_control.dart';
 
 import '../models/locations_model.dart';
 

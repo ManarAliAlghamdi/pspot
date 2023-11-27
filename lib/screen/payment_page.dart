@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pspot_test/screen/problem_screen.dart';
+import '/screen/problem_screen.dart';
 
 import '../models/locations_model.dart';
 import '../models/shared_methods.dart';

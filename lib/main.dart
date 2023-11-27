@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pspot_test/screen/invoices.dart';
-import 'package:pspot_test/screen/login.dart';
-import 'package:pspot_test/screen/signup.dart';
+import '/screen/invoices.dart';
+import '/screen/login.dart';
+import '/screen/signup.dart';
 import '/screen/homeScreen.dart';
 // import '/screen/bookYourSpot.dart';
 import 'screen/Profile.dart';

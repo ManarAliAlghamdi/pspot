@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pspot_test/models/shared_methods.dart';
+import '/models/shared_methods.dart';
 import '../modules/customer_invoice_details.dart';
 import '../modules/customer_tickets_summary_delete.dart';
 import '../modules/fluid_nav_bar.dart';

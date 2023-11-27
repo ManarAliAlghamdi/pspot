@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pspot_test/screen/bookYourSpot.dart';
+import '/screen/bookYourSpot.dart';
 import '../models/nav_item_model.dart';
 import '../screen/Profile.dart';
 
