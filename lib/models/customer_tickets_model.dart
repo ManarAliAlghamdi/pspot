@@ -12,7 +12,6 @@ class CustomerInvoiceDetails {
   final double taxAmount;
   final double totalCost;
   final String invoicePaymentStatus;
-  // final int customerNo;
   final int invoiceNo;
 
 
@@ -30,12 +29,10 @@ class CustomerInvoiceDetails {
     required this.taxAmount,
     required this.totalCost,
     required this.invoicePaymentStatus,
-    // required this.customerNo,
     required this.invoiceNo
 
 
 });
-
 }
 class CustomerInvoices{
   final String locationLogo;
@@ -44,7 +41,6 @@ class CustomerInvoices{
   final String ticketDateTime;
   final int invoiceNo;
   final int customerNo;
-
 
   CustomerInvoices({
     required this.locationLogo,
@@ -58,18 +54,3 @@ class CustomerInvoices{
 
   });
 }
-// final int customerId;
-// final int parkingSpotId;
-// final int sectionNo;
-// final int floorNo;
-// final int locationNo;
-// final int ticketNo;
-// final int invoiceNo;
-//
-// required this.customerId,
-// required this.parkingSpotId,
-// required this.sectionNo,
-// required this.floorNo,
-// required this.locationNo,
-// required this.ticketNo,
-// required this.invoiceNo,

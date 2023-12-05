@@ -2,10 +2,8 @@
 import 'package:flutter/material.dart';
 import '../models/locations_model.dart';
 import '../models/shared_methods.dart';
-import '../modules/floor_control.dart';
 import '../modules/fluid_nav_bar.dart';
 import '../modules/loaction_control.dart';
-import '../modules/sectionsControl.dart';
 import 'package:intl/intl.dart';
 import 'reserveParkingSpot.dart';
 
@@ -69,10 +67,11 @@ class _BookYourSpotState extends State<BookYourSpot> {
         initialTime: TimeOfDay.fromDateTime(selectedDateTime),
         builder: (BuildContext context, Widget? child) {
           return Theme(
-            data: ThemeData.light().copyWith(
+            data: ThemeData().copyWith(
               primaryColor: const Color(0xffC4DFDF),
               colorScheme: const ColorScheme.light(primary: Color(0xffC4DFDF)),
               buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+
             ),
             child: child!,
           );
@@ -109,6 +108,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
     });
   }
 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -126,6 +126,7 @@ class _BookYourSpotState extends State<BookYourSpot> {
       initLocations(widget.staticCustomerId);
     }
   }
+
 
   Future<void> _refreshLocations() async {
     setState(() {
@@ -146,26 +147,20 @@ class _BookYourSpotState extends State<BookYourSpot> {
 
   void filterLocationList() {
     setState(() {
-      filteredLocationsList = locationsList
-          .where((i) =>
-          i.locationName
-              .toLowerCase()
-              .contains(searchTextField.text.toLowerCase()))
-          .toList();
+      filteredLocationsList = locationsList.where((i) => i.locationName.toLowerCase().contains(searchTextField.text.toLowerCase())).toList();
     });
   }
 
 
   @override
   Widget build(BuildContext context) {
-
-
     staticCustomerId = widget.staticCustomerId;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           "The Locations", style: TextStyle(color: Colors.white),),
         backgroundColor: const Color(0xffC4DFDF),
+
       ),
       body: SingleChildScrollView(
           child: SizedBox(

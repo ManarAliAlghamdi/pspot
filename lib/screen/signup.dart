@@ -241,12 +241,40 @@ Future<void> signUp(String firstName, String lastName, String email, String phon
                     //borderRadius: BorderRadius.circular(12)),
                     child: GestureDetector(
                         onTap:()async{
-                          await signUp(
+                         await signUp(
                               _firstnameController.text, _lastnameController.text,
-                              _emailController.text, _phonedController.text, _passwordController.text);
+                              _emailController.text, _phonedController.text, _passwordController.text
+                         );
+
+                          if (customerId == -1){
+                            AlertDialog alert = AlertDialog(
+                              title: const Text(
+                                  "Sorry, The Number Already used"),
+                              content: const Text(
+                                  "Please Try Another Phone Number"),
+                              actions: [
+                                Center(child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pop();
+                                    },
+                                    child: const Text("OK"),
+                                    style: ElevatedButton
+                                        .styleFrom(
+                                      primary: const Color(
+                                          0xffC4DFDF),
+                                    ))
+                                )
+                              ],
+                            );
+                            showDialog(context: context, builder: (BuildContext context) {
+                                return alert;
+                              },
+                            );
+                          }else if (customerId != 0) {
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context)=> UserProfile(staticCustomerId: customerId,)
-                          ));
+                          ));}
                         },
                         child: Text(
                           'Sign UP',
@@ -265,9 +293,11 @@ Future<void> signUp(String firstName, String lastName, String email, String phon
               //text_signUp
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(
+
                   'you already have an account?',
                   style: GoogleFonts.robotoCondensed(
                     fontWeight: FontWeight.bold,
+
                   ),
                 ),
                 GestureDetector(

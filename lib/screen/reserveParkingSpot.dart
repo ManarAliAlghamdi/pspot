@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import '/models/shared_methods.dart';
 import '../modules/customer_invoice_details.dart';
-import '../modules/customer_tickets_summary_delete.dart';
 import '../modules/fluid_nav_bar.dart';
-import '/modules/floor_list_control.dart';
 import '../models/locations_model.dart';
-import 'payment_page.dart';
+import 'tickets_summary.dart';
 
 class ReserveParkingSpot extends StatefulWidget {
   final int locationId;
@@ -21,13 +19,14 @@ class ReserveParkingSpot extends StatefulWidget {
 }
 
 class _ReserveParkingSpot extends State<ReserveParkingSpot> {
-  List<LocationParkingSpotModelOnServer> spotsList = [];
+
+  List<LocationParkingSpotModel> spotsList = [];
+
   bool showProcessing = true;
   bool showTable = false;
   bool showDetails = false;
   String ticketId = '';
   int ticketsIndex = 0;
-
   String spotDes = '';
   String sectionDes = '';
   String floorDes = '';
@@ -63,6 +62,9 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
         title: Text('Book Your Tickets To \n${widget.locationName}',
           style: const TextStyle(fontSize: 15),),
         backgroundColor: const Color(0xffC4DFDF),
+        leading: IconButton(onPressed: () {Navigator.of(context).pop();},
+                            icon: Icon(Icons.arrow_back_ios),
+        ),
 
       ),
 
@@ -96,20 +98,18 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: GestureDetector(
                                           onTap: () {
-                                            if (spotsList[index]
-                                                .parkingSpotStatus == 'No') {
+                                            if (spotsList[index].parkingSpotStatus == 'No') {
                                               AlertDialog alert = AlertDialog(
                                                 title: const Text(
-                                                    "Sorry, The Spot not Available"),
+                                                    "Sorry, The Spot not Available",),
                                                 content: const Text(
                                                     "Please choose Another Spot"),
                                                 actions: [
                                                   Center(child: ElevatedButton(
                                                       onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
+                                                        Navigator.of(context).pop();
                                                       },
-                                                      child: const Text("OK"),
+                                                      child: const Text("OK",style: TextStyle(color: Colors.white)),
                                                       style: ElevatedButton
                                                           .styleFrom(
                                                         primary: const Color(
@@ -136,7 +136,7 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                               });
                                               Navigator.push(context, MaterialPageRoute(
                                                   builder: (context) =>
-                                                      PaymentPageEdited(staticCustomerId: widget.staticCustomerId, locationLogo: widget.locationLogo,
+                                                      TicketSummary(staticCustomerId: widget.staticCustomerId, locationLogo: widget.locationLogo,
                                                         locationName: widget.locationName, ticketSpotInfo: spotsList[index], resDate: widget.dateRev,
                                                         period: widget.period, locationID: widget.locationId,
                                                       )

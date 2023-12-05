@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/modules/location_logo_control.dart';
+import '/modules/favesLocarionAtHomeScreen.dart';
 import '/screen/bookYourSpot.dart';
 import '../models/customer_faves_models.dart';
 import '../models/locations_model.dart';
@@ -26,19 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showLoading = true;
   bool stopLoading = false;
   List<String> test= ['assets/images/blvd.png','assets/images/blvd.png','assets/images/blvd.png'];
-  // List<LocationModel> filteredLocationsList = [];
 
-
-  // Future<void> initFavesLocations(customerNo) async {
-  //   favesLocations = [];
-  //   await getCustomerFavesLocations(customerNo).then((value) {
-  //     setState(() {
-  //       favesLocations = value;
-  //       showLoading = false;
-  //       stopLoading = true;
-  //     });
-  //   });
-  // }
 
   @override
   void initState() {
@@ -49,13 +37,28 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
-  void getLocationSLogo() async {
-    await getLocationLogo().then((value){
+  Future<void> initFavesLocations() async {
+    favesLocations = [];
+
+    await getCustomerFavesLocations(widget.staticCustomerId ).then((value) {
       setState(() {
-        locationLogoList = value;
-        showProcessing = false;
-        showHome = true;
+        favesLocations = value;
       });
+    });
+  }
+
+
+  void getLocationSLogo() async {
+    await getLocationLogo().then((value) async {
+      locationLogoList = value;
+      await initFavesLocations().then((value)  {
+        setState(() {
+
+          showProcessing = false;
+          showHome = true;
+        });
+      });
+
     });
   }
 
@@ -132,16 +135,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 context, MaterialPageRoute(
                                               builder: (context) =>
                                                   BookYourSpot(title: 'title',
-                                                      staticCustomerId: widget
-                                                          .staticCustomerId,
+                                                      staticCustomerId: widget.staticCustomerId,
                                                       dateOrLocation: 'date',
-                                                      locationIdFromFaves: locationLogoList[index]
-                                                          .locationId,
-                                                      locationLogo: locationLogoList[index]
-                                                          .locationLogo,
-                                                      locationName: locationLogoList[index]
-                                                          .locationName
-
+                                                      locationIdFromFaves: locationLogoList[index].locationId,
+                                                      locationLogo: locationLogoList[index].locationLogo,
+                                                      locationName: locationLogoList[index].locationName
                                                   ),
                                             )
                                             );
@@ -163,17 +161,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                     style: TextStyle(fontSize: 15,
                                         fontWeight: FontWeight.bold),),
                                 ),
-                                SingleChildScrollView(
-                                  child:
-                                  Container(
-                                    height: 250,
-                                    child: ListView.builder(
-                                      itemCount: locationLogoList.length,
-                                      scrollDirection: Axis.vertical,
-                                      itemBuilder: (context, index) {
-                                        return LocationsLogoControl(staticCustomerId: widget.staticCustomerId, theIndex: index, showLoading: showLoading, stopLoading: stopLoading,);
-                                      },
-                                    ),
+                                Container(
+                                  height: 250,
+                                  child: Stack(
+                                    children: [
+                                      Visibility(child: Container(
+
+
+                                      )),
+                                      Visibility(
+                                        child: ListView.builder(
+                                        itemCount: favesLocations.length,
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, index) {
+                                          return FavesLocationAtHomeScreen(staticCustomerId: widget.staticCustomerId, favesLocations: favesLocations[index], );
+                                        },
+                                                                            ),
+                                      )],
                                   ),
                                 ),
                               ],

@@ -50,48 +50,45 @@ class _LocationControl  extends State<LocationControl> {
       });
     }
     return GestureDetector(
-      child: Container(
+      child:  Container(
         child: Column(
-        children: [
-          const SizedBox(height: 10,),
-          Row(
-            children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 60,
-                width: 70,
-
-                child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: Image.asset(locationInfo!.locationLogo,),
+          children: [
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: 50,
+                    width: 56,
+                    child: FittedBox(
+                      fit: BoxFit.fill,
+                      child: Image.asset(locationInfo!.locationLogo,),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Column(
-                children: [
-                  Column(
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Column(
                     children: [
                       SizedBox(
-                          width:MediaQuery.of(context).size.width - 230,
-                          child: Text(locationInfo!.locationName,textAlign: TextAlign.left,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)),
-                      SizedBox(
-                        width:MediaQuery.of(context).size.width - 230,
-                        child: Text(locationInfo!.locationAvailableSpots > 0? formatter.format(locationInfo!.locationAvailableSpots): 'No spots available',textAlign: TextAlign.right,style: TextStyle(color: locationInfo!.locationAvailableSpots == 0? Colors.red:Colors.black,),),),
-                      LinearPercentIndicator(
-                        width: MediaQuery.of(context).size.width - 200,
-                        lineHeight: 14.0,
-                        percent: locationInfo!.locationAvailableSpots == 0? 0: (locationInfo!.locationAvailableSpots/locationInfo!.locationCapacity) ,
-                        backgroundColor: Colors.grey,
-                        progressColor:  (locationInfo!.locationAvailableSpots == 0 || locationInfo!.locationCapacity == 0)? Colors.grey : (locationInfo!.locationAvailableSpots/locationInfo!.locationCapacity) * 100 >= 50? Colors.lime : (locationInfo!.locationAvailableSpots/locationInfo!.locationCapacity) * 100 >= 25? Colors.orange:Colors.red,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width - 180,
+                        child: Text(
+                          locationInfo!.locationName,
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
+                ),
               Padding(
                 padding: const EdgeInsets.only(),
                 child: IconButton(

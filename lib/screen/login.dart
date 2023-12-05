@@ -13,7 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  final _firstNameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
   final _passwordController = TextEditingController();
   int customerId = 0;
 
@@ -40,12 +40,7 @@ Future<void> _initCustomerId(String firstName, String password)async{
   });
 }
 
-//   @override
-//   void dispose() async{
-//    super.dispose();
-//     _firstNameController.dispose();
-//     _passwordController.dispose();
-// }
+//
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,12 +71,12 @@ Future<void> _initCustomerId(String firstName, String password)async{
             const SizedBox(height: 40,),
             TextField(
               cursorColor: Colors.black,
-              controller: _firstNameController,
+              controller: _phoneNumberController,
 
 
               decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(0.0),
-                  labelText: 'First Name',
+                  labelText: 'Phone Number',
                   // hintText: 'Phone number',
                   labelStyle: const TextStyle(
                     color: Colors.black,
@@ -152,12 +147,39 @@ Future<void> _initCustomerId(String firstName, String password)async{
                       ,
                     child: GestureDetector(
                       onTap: () async{
-                       await _initCustomerId(_firstNameController.text, _passwordController.text);
-
-                         Navigator.push(context, MaterialPageRoute(
-                             builder: (context)=> HomeScreen(staticCustomerId: customerId,)
-                         ));
-
+                       await _initCustomerId(_phoneNumberController.text, _passwordController.text);
+                       if (customerId == -1){
+                         AlertDialog alert = AlertDialog(
+                           title: const Text(
+                               "Wrong Password or Phone Number"),
+                           content: const Text(
+                               "Please Try Again"),
+                           actions: [
+                             Center(child: ElevatedButton(
+                                 onPressed: () {
+                                   Navigator.of(context)
+                                       .pop();
+                                 },
+                                 child: const Text("OK"),
+                                 style: ElevatedButton
+                                     .styleFrom(
+                                   primary: const Color(
+                                       0xffC4DFDF),
+                                 ))
+                             )
+                           ],
+                         );
+                         showDialog(context: context, builder: (BuildContext context) {
+                           return alert;
+                         },
+                         );
+                       }else if(customerId != 0){
+                       Navigator.push(context, MaterialPageRoute(
+                       builder: (context) =>
+                       HomeScreen(staticCustomerId: customerId,)
+                        )
+                        );
+                      }
 
                       },
 

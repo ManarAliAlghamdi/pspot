@@ -13,7 +13,6 @@ class SavedSpot extends StatefulWidget {
 }
 
 class _SavedSpotState extends State<SavedSpot> {
-
   bool showFavesLocations = false;
   bool showProcessing = true;
   bool isFaves = true;
@@ -21,26 +20,18 @@ class _SavedSpotState extends State<SavedSpot> {
   List<CustomerFavesLocations> filteredFavesLocations = [];
 
   TextEditingController searchTextField = TextEditingController();
-  Future<void> customerAddFaves(int customerId, int parkingSpotId) async {
-    await addLocationIntoFaves(customerId, parkingSpotId).then((value) {
-      setState(() {
-        isFaves = true;
-      });
-    });
-  }
 
 
   Future<void> customerRemoveFaves(int customerId, int parkingSpotId) async {
     await removeLocationFromFaves(customerId, parkingSpotId).then((value) {
       setState(() {
-        isFaves = false;
+        _refreshFavesLocations();
       });
     });
   }
 
   void initFavesLocations(customerNo) async {
     favesLocations = [];
-
     await getCustomerFavesLocations(customerNo).then((value) {
       setState(() {
         showFavesLocations = true;
@@ -51,6 +42,7 @@ class _SavedSpotState extends State<SavedSpot> {
       filteredFavesLocations = favesLocations;
     });
   }
+
 
   Future<void> _refreshFavesLocations() async {
     setState(() {
@@ -70,8 +62,7 @@ class _SavedSpotState extends State<SavedSpot> {
   // filled up the filtered list according to user search
   void filterCustomerLocations() {
     setState(() {
-      filteredFavesLocations = favesLocations.where(
-              (i) => i.locationName.toLowerCase().contains(searchTextField.text.toLowerCase())).toList();
+      filteredFavesLocations = favesLocations.where((i) => i.locationName.toLowerCase().contains(searchTextField.text.toLowerCase())).toList();
     });
   }
 
@@ -187,12 +178,8 @@ class _SavedSpotState extends State<SavedSpot> {
                                                         padding: const EdgeInsets.only(),
                                                         child: IconButton(
                                                             onPressed: () async {
-                                                              if (isFaves) {
+                                                              if (filteredFavesLocations[index].isFave == 'yes') {
                                                                 await customerRemoveFaves(widget.staticCustomerId, filteredFavesLocations[index].locationId);
-                                                              } else if (isFaves == false) {
-                                                                await customerAddFaves(
-                                                                    widget.staticCustomerId,
-                                                                    filteredFavesLocations[index].locationId);
                                                               }
                                                             },
                                                             icon: isFaves ? const Icon(Icons.favorite, color: Colors.orange,) :

@@ -13,8 +13,8 @@ Future<Null> updated(StateSetter updateState) async {
 }
 
 
-Future<List<LocationParkingSpotModelOnServer>> getAvailableSpotsByLocation(int locationId, int customerId, String requriredDateAndTime, int  requiredPeriod)async{
-  List<LocationParkingSpotModelOnServer> locationsList = [];
+Future<List<LocationParkingSpotModel>> getAvailableSpotsByLocation(int locationId, int customerId, String requriredDateAndTime, int  requiredPeriod)async{
+  List<LocationParkingSpotModel> locationsList = [];
   try{
     String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetAvaliableSpotsByLocation&conncectionStringInWebConfig=pSpotconnection";
     List userData = [];
@@ -39,7 +39,7 @@ Future<List<LocationParkingSpotModelOnServer>> getAvailableSpotsByLocation(int l
         for(int i = 0;i < userData.length;i++)
         {
           locationsList.add(
-              LocationParkingSpotModelOnServer(
+              LocationParkingSpotModel(
                   floorId: int.parse(userData[i]["R1"]),
               floorName: userData[i]["R2"],
               sectionId: int.parse(userData[i]["R3"]),
@@ -60,40 +60,6 @@ print("hello there's an error ;)");
 
 }
 
-Future<List<ParkingSpotModel>> reserveParkingSlot(int parkingSpotId)
-async {
-  List<ParkingSpotModel> parkingSpotsList = [];
-  try
-  {
-
-    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpot_sp_ReservParkingSpot&conncectionStringInWebConfig=pSpotconnection";
-    List userData = [];
-    Uri finalUri = Uri.parse(uri);
-    await http.post(finalUri, body: {
-      'P1': '@parkingSpotId',
-      'PV1': parkingSpotId.toString(),
-
-    }
-    ).then((value) async {
-      userData = jsonDecode(value.body);
-      if(userData.isNotEmpty)
-      {
-        for(int i = 0;i < userData.length;i++)
-        {
-          parkingSpotsList.add(ParkingSpotModel(parkingSpotId: int.parse(userData[i]["R1"]), parkingSpotDescription:  userData[i]["R2"],
-              parkingSpotStatus: userData[i]["R3"].toString() == 'yes'? true:false, parkingSpotDirection:   userData[i]["R4"],isSNSpot: userData[i]["R5"],
-              parkingSpotSectionNo:  parkingSpotId,isSelected: false));
-        }
-      }
-    });
-
-    return parkingSpotsList;
-  }
-  catch(ex)
-  {
-    return parkingSpotsList;
-  }
-}
 
 // whenever i need to use async and await i need to use Future
 Future<List<LocationModel>> getLocations(int customerId) async {
@@ -190,117 +156,11 @@ Future<List<CustomerInformation>> getCustomerInfo(int customerID) async{
 }
 
 
-Future<List<FloorModel>> getLocationFloors(int locationNo)
-async {
-  List<FloorModel> floorsList = [];
-  try {
-    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetLocationsFloor&conncectionStringInWebConfig=pSpotconnection";
-    List userData = [];
-    Uri finalUri = Uri.parse(uri);
-    await http.post(finalUri, body: {
-      // the procedure's parameter
-      'P1': '@locationId',
-      // the value that will be assign into the parameter
-      'PV1': locationNo.toString(),
-      //   PV1 shortcut for Parameter Value
-    }).then((value) async {
-      userData = jsonDecode(value.body);
-      if (userData.isNotEmpty) {
-        for (int i = 0; i < userData.length; i++) {
-          floorsList.add(
-              FloorModel(
-                  floorId: int.parse(userData[i]["R1"]),
-                  floorDescription: userData[i]["R2"],
-                  floorCapacity: int.parse(userData[i]["R3"]),
-                  floorAvailableSpots: int.parse(userData[i]["R4"]),
-                  floorLocationNo: locationNo));
-        }
-      }
-    });
-    return floorsList;
-  }
-  catch (ex) {
-    return floorsList;
-  }
-}
 
-Future<List<SectionModel>> getFloorSections(int floorNo)
-async {
-  List<SectionModel> sectionsList = [];
-  try {
-    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetFloorSections&conncectionStringInWebConfig=pSpotconnection";
-
-    List userData = [];
-    Uri finalUri = Uri.parse(uri);
-    await http.post(finalUri, body: {
-      'P1': '@floorId',
-      'PV1': floorNo.toString(),
-    }
-    ).then((value) async {
-      userData = jsonDecode(value.body);
-      if (userData.isNotEmpty) {
-        for (int i = 0; i < userData.length; i++) {
-          sectionsList.add(
-              SectionModel(
-                  sectionId: int.parse(userData[i]["R1"]),
-                  sectionDescription: userData[i]["R2"],
-                  sectionCapacity: int.parse(userData[i]["R3"]),
-                  sectionAvailableSpots: int.parse(userData[i]["R4"]),
-                  sectionFloorNo: floorNo
-              ));
-        }
-      }
-    }
-    );
-
-    return sectionsList;
-  }
-  catch (ex) {
-    return sectionsList;
-  }
-}
-
-Future<List<ParkingSpotModel>> getSectionParkingSpots(int sectionNo)
-async {
-  List<ParkingSpotModel> parkingSpotsList = [];
-  try
-  {
-
-    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetSectionParkingSpots&conncectionStringInWebConfig=pSpotconnection";
-
-    List userData = [];
-    Uri finalUri = Uri.parse(uri);
-    await http.post(finalUri, body: {
-      'P1': '@sectionId',
-      'PV1': sectionNo.toString(),
-
-    }
-    ).then((value) async {
-      userData = jsonDecode(value.body);
-      if(userData.isNotEmpty)
-      {
-        for(int i = 0;i < userData.length;i++)
-        {
-          parkingSpotsList.add(ParkingSpotModel(parkingSpotId: int.parse(userData[i]["R1"]), parkingSpotDescription:  userData[i]["R2"],
-              parkingSpotStatus: userData[i]["R3"].toString() == 'yes'? true:false, parkingSpotDirection:   userData[i]["R4"],isSNSpot: userData[i]["R5"],
-              parkingSpotSectionNo:  sectionNo,isSelected: false));
-        }
-      }
-    });
-
-    return parkingSpotsList;
-  }
-  catch(ex)
-  {
-    return parkingSpotsList;
-  }
-}
 
 
 Future<List<CustomerFavesLocations>> getCustomerFavesLocations(int customerId)async {
-
   List<CustomerFavesLocations> customerFavesLocations = [];
-
   try {
     String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_GetCustomerFavesLocations&conncectionStringInWebConfig=pSpotconnection";
     List userData = [];
@@ -323,7 +183,7 @@ Future<List<CustomerFavesLocations>> getCustomerFavesLocations(int customerId)as
                 locationLogo: 'assets/images/${userData[i]["R1"]}',
                 locationName: userData[i]["R2"],
                 locationId: int.parse(userData[i]["R3"]),
-
+                isFave: userData[i]["R4"],
 
               ));
         }
@@ -335,6 +195,9 @@ Future<List<CustomerFavesLocations>> getCustomerFavesLocations(int customerId)as
     return customerFavesLocations;
   }
 }
+
+
+
 Future<List<CustomerInvoiceDetails>> getCustomerInvoiceDetails(int invoiceNo) async {
   List<CustomerInvoiceDetails> invoiceDetailsList = [];
   try {
@@ -395,6 +258,11 @@ Future<int> getCustomerId(String customerPhoneNumber, String password)async{
         if(userData[0]["R1"] == "ok") {
           customerId = int.parse(userData[0]["R2"]);
         }
+        else if(userData[0]["R1"] == "wrong input"){
+          customerId = int.parse(userData[0]["R2"]);
+          print(userData[0]["R2"]);
+        }
+
       }
     });
     return customerId;
@@ -431,6 +299,9 @@ Future<int> customerSignUp(String firstName, String lastName, String email, Stri
       userData = jsonDecode(value.body);
       if(userData.isNotEmpty){
         if(userData[0]["R1"] == "ok") {
+          customerId = int.parse(userData[0]["R2"]);
+        }
+        else if(userData[0]["R1"] == "exists") {
           customerId = int.parse(userData[0]["R2"]);
         }
       }
@@ -554,7 +425,10 @@ Future<void> removeLocationFromFaves(int customerId, int locationId)async{
       if(userData.isNotEmpty)
       {
         if(userData[0]["R1"] == "ok") {
-          print("deleting all done");}}});
+          print("deleting all done");
+
+
+        }}});
   }
   catch(ex){print("somthing went wrong! in deleting");
   }

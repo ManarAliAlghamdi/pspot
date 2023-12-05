@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '/screen/problem_screen.dart';
-
 import '../models/locations_model.dart';
 import '../models/shared_methods.dart';
 import 'Done_page.dart';
@@ -8,26 +7,25 @@ import 'reserveParkingSpot.dart';
 
 
 
-class PaymentPageEdited extends StatefulWidget {
+class TicketSummary extends StatefulWidget {
   final int staticCustomerId;
   final String locationLogo;
   final String locationName;
-  final LocationParkingSpotModelOnServer ticketSpotInfo;
+  final LocationParkingSpotModel ticketSpotInfo;
   final String resDate;
   final int period;
   final int locationID;
-  const PaymentPageEdited({Key? key, required this.staticCustomerId,
-    required this.locationLogo, required this.locationName, required this.ticketSpotInfo, required this.resDate, required this.period, required this.locationID}) : super(key: key);
+  const TicketSummary({Key? key, required this.staticCustomerId, required this.locationLogo, required this.locationName, required this.ticketSpotInfo, required this.resDate, required this.period, required this.locationID}) : super(key: key);
 
 
   @override
-  _PaymentPageEditedState createState() => _PaymentPageEditedState();
+  _TicketSummaryState createState() => _TicketSummaryState();
 }
 
-class _PaymentPageEditedState extends State<PaymentPageEdited> {
+class _TicketSummaryState extends State<TicketSummary> {
   var cards;
   int staticCustomerId = 0;
-  late LocationParkingSpotModelOnServer ticketSpotInfo;
+  late LocationParkingSpotModel ticketSpotInfo;
   double subTotal = 0;
   double taxAmount = 0;
   double totalCost = 0;
@@ -62,6 +60,7 @@ String resState = '';
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
         backgroundColor: const Color(0xffC4DFDF),
       leading:
+
       IconButton(
           onPressed:  (){  Navigator.push(context, MaterialPageRoute(
               builder: (context) => ReserveParkingSpot(
@@ -72,6 +71,8 @@ String resState = '';
                 locationName: widget.locationName,
                 locationLogo: widget.locationLogo,)));},
           icon: const Icon(Icons.arrow_back)),
+
+
       ),
       body: ListView(
         children: [

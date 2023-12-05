@@ -1,28 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/models/locations_model.dart';
-
 import '../models/customer_faves_models.dart';
 import '../models/shared_methods.dart';
 import '../screen/bookYourSpot.dart';
 
-class LocationsLogoControl extends StatefulWidget {
-  final int theIndex;
+class FavesLocationAtHomeScreen extends StatefulWidget {
   final int staticCustomerId;
-  final bool showLoading;
-  final bool stopLoading;
-   LocationsLogoControl({super.key,  required this.staticCustomerId, required this.theIndex, required this.showLoading, required this.stopLoading});
+  final CustomerFavesLocations favesLocations ;
+  const FavesLocationAtHomeScreen({super.key,  required this.staticCustomerId, required this.favesLocations});
 
   @override
-  State<LocationsLogoControl> createState() => _LocationsLogoControlState();
+  State<FavesLocationAtHomeScreen> createState() => _FavesLocationAtHomeScreenState();
 }
 
-class _LocationsLogoControlState extends State<LocationsLogoControl> {
-  LocationLogo? _location; //=  LocationModel(locationId: 0, locationName: '', locationOnMap: '', locationLogo: '', locationCapacity: 0, locationAvailableSpots: 0, favesLocation: 0);
+class _FavesLocationAtHomeScreenState extends State<FavesLocationAtHomeScreen> {
+  LocationLogo? _location;
 
 
-  List<CustomerFavesLocations> favesLocations = [];
-  List<CustomerFavesLocations> filteredFavesLocations = [];
+  CustomerFavesLocations? favesLocations;
+
   bool isFaves = true;
   bool showFavesLocations = false;
   bool showProcessing = true;
@@ -45,36 +41,11 @@ class _LocationsLogoControlState extends State<LocationsLogoControl> {
     });
   }
 
-  void initFavesLocations(customerNo) async {
-    favesLocations = [];
-
-    await getCustomerFavesLocations(customerNo).then((value) {
-      setState(() {
-        favesLocations = value;
-
-      });
-
-      filteredFavesLocations = favesLocations;
-    });
-  }
-
-
-
-  // filled up the filtered list according to user search
-  void filterCustomerLocations() {
-    setState(() {
-      filteredFavesLocations = favesLocations.where(
-              (i) =>
-              i.locationName.toLowerCase().contains(
-                  searchTextField.text.toLowerCase())).toList();
-    });
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    initFavesLocations(widget.staticCustomerId);
+    favesLocations = widget.favesLocations;
   }
 
   @override
@@ -95,7 +66,7 @@ class _LocationsLogoControlState extends State<LocationsLogoControl> {
 
               },
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  // mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
@@ -105,12 +76,9 @@ class _LocationsLogoControlState extends State<LocationsLogoControl> {
                                   title: 'Parking Spots | Locations List',
                                   staticCustomerId: widget.staticCustomerId,
                                   dateOrLocation: 'date',
-                                  locationIdFromFaves: filteredFavesLocations[widget
-                                      .theIndex].locationId,
-                                  locationLogo: filteredFavesLocations[widget
-                                      .theIndex].locationLogo,
-                                  locationName: filteredFavesLocations[widget
-                                      .theIndex].locationName,)
+                                  locationIdFromFaves: favesLocations!.locationId,
+                                  locationLogo: favesLocations!.locationLogo,
+                                  locationName: favesLocations!.locationName,)
                         )
                         );
                       },
@@ -130,9 +98,7 @@ class _LocationsLogoControlState extends State<LocationsLogoControl> {
                                       child: FittedBox(
                                         fit: BoxFit.fill,
                                         child: Image.asset(
-                                            filteredFavesLocations[widget
-                                                .theIndex]
-                                                .locationLogo),
+                                            favesLocations!.locationLogo),
                                       ),
                                     ),
                                   ),
@@ -143,7 +109,7 @@ class _LocationsLogoControlState extends State<LocationsLogoControl> {
                                         SizedBox(
                                           width: MediaQuery.of(context).size.width - 180,
                                           child: Text(
-                                            filteredFavesLocations[widget.theIndex].locationName,
+                                            favesLocations!.locationName,
                                             textAlign: TextAlign.left,
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -161,13 +127,11 @@ class _LocationsLogoControlState extends State<LocationsLogoControl> {
                                             if (isFaves) {
                                               await customerRemoveFaves(
                                                   widget.staticCustomerId,
-                                                  filteredFavesLocations[widget
-                                                      .theIndex].locationId);
+                                                  favesLocations!.locationId);
                                             } else if (isFaves == false) {
                                               await customerAddFaves(
                                                   widget.staticCustomerId,
-                                                  filteredFavesLocations[widget
-                                                      .theIndex].locationId);
+                                                  favesLocations!.locationId);
                                             }
                                           },
                                           icon: isFaves ? const Icon(
