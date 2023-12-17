@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 import '/models/customer_faves_models.dart';
-import '/models/customer_tickets_model.dart';
+import '/models/customer_invoice_model.dart';
 import '/models/customers_information.dart';
 import 'locations_model.dart';
 
@@ -95,9 +95,7 @@ Future<List<LocationModel>> getLocations(int customerId) async {
                   locationName:  userData[i]["R2"],
                   locationOnMap:  userData[i]["R3"],
                   locationLogo:  'assets/images/${userData[i]["R4"]}',
-                  locationCapacity: double.parse( userData[i]["R5"]),
-                  locationAvailableSpots: double.parse( userData[i]["R6"]),
-                  favesLocation: int.parse(userData[i]["R7"])
+                  favesLocation: int.parse(userData[i]["R5"])
               )
           );
         }
@@ -183,7 +181,7 @@ Future<List<CustomerFavesLocations>> getCustomerFavesLocations(int customerId)as
                 locationLogo: 'assets/images/${userData[i]["R1"]}',
                 locationName: userData[i]["R2"],
                 locationId: int.parse(userData[i]["R3"]),
-                isFave: userData[i]["R4"],
+
 
               ));
         }
@@ -226,7 +224,9 @@ Future<List<CustomerInvoiceDetails>> getCustomerInvoiceDetails(int invoiceNo) as
                   taxAmount: double.parse(userData[i]["R11"]),
                   totalCost: double.parse(userData[i]["R12"]),
                   invoicePaymentStatus: userData[i]["R13"],
-                  invoiceNo: invoiceNo)
+                  invoiceNo: invoiceNo,
+                  status: userData[i]["R14"]
+              )
           );
         }
       }
@@ -506,4 +506,28 @@ print('there is problem in getting locations logo :(');
     return locationsLogo;
   }
 
+}
+
+Future<String> cancelReservation(int invoiceNo)async {
+  String status = '';
+  try {
+    String uri = "https://nga.myquotas.com/NGA/GDN?storedProcedureName=dbo.pSpotDb_sp_cancelReservation&conncectionStringInWebConfig=pSpotconnection";
+    List userData = [];
+
+    Uri finalUri = Uri.parse(uri);
+
+    await http.post(finalUri, body: {
+      'P1': '@invoiceNo',
+      'PV1': invoiceNo.toString(),
+
+    }).then((value) {
+      userData = jsonDecode(value.body);
+      if (userData.isNotEmpty) {
+        status  = userData[0]["R1"];
+      }
+    });
+    return status;
+  } catch (ex) {
+    return status;
+  }
 }

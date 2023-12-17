@@ -1,7 +1,6 @@
-// import 'package:demo_project/main.dart';
 import 'package:flutter/material.dart';
+import '/screen/login.dart';
 import '../models/customers_information.dart';
-import 'homeScreen.dart';
 import '/models/shared_methods.dart';
 import '../modules/fluid_nav_bar.dart';
 
@@ -75,8 +74,11 @@ class _UserProfileState extends State<UserProfile> {
     staticCustomerId = widget.staticCustomerId;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: () {  }, icon: Icon(Icons.add, color: Color(0xffC4DFDF,)),),
 
-        title: const Text('Your Profile'),
+        title: Padding(
+            padding: EdgeInsets.only(left: 50),
+            child: const Text('Your Profile', style: TextStyle(color: Colors.white),)),
         backgroundColor: const Color(0xffC4DFDF),
 
       ),
@@ -84,11 +86,8 @@ class _UserProfileState extends State<UserProfile> {
       body: Container(
         margin: const EdgeInsets.only(top: 20.0),
         child: SingleChildScrollView(
-
             child: Center(
-
               child: SizedBox(
-
                   height: 400,
                   child: Column(
                       children: [
@@ -288,7 +287,35 @@ class _UserProfileState extends State<UserProfile> {
                                                                             ),
                                                                           ]
                                                                       ),
-
+                                                                      Padding(
+                                                                        padding: EdgeInsets.only(top: 30, left: 55),
+                                                                        child: SizedBox(
+                                                                          height: 50,
+                                                                          child: Center(
+                                                                            child: ElevatedButton.icon(
+                                                                              onPressed: () {
+                                                                                Navigator.pushReplacement(context, MaterialPageRoute(
+                                                                                    builder: (context)=> const LoginScreen()));
+                                                                              },
+                                                                              icon: const Icon(
+                                                                                Icons.cancel_rounded,
+                                                                                color: Colors.white,
+                                                                              ),
+                                                                              label: const Text(
+                                                                                "Log Out",
+                                                                                style: TextStyle(
+                                                                                  color: Colors.white,
+                                                                                  fontSize: 17,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                ),
+                                                                              ),
+                                                                              style: ElevatedButton.styleFrom(
+                                                                                backgroundColor: Colors.red,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
                                                                     ]),
                                                               ),
                                                             ]
@@ -300,7 +327,9 @@ class _UserProfileState extends State<UserProfile> {
                                           }
                                       ),
                                     ),
-                                  )
+                                  ),
+
+
                                 ]
                             )
                         ),
@@ -311,7 +340,6 @@ class _UserProfileState extends State<UserProfile> {
         ),
 
       ),
-      bottomNavigationBar: SizedBox(height: 70, child: FluidNavBar(staticCustomerId: staticCustomerId,)),
     );
   }
 }

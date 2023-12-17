@@ -13,6 +13,7 @@ class CustomerInvoiceDetails {
   final double totalCost;
   final String invoicePaymentStatus;
   final int invoiceNo;
+  final String status;
 
 
   CustomerInvoiceDetails({
@@ -29,7 +30,8 @@ class CustomerInvoiceDetails {
     required this.taxAmount,
     required this.totalCost,
     required this.invoicePaymentStatus,
-    required this.invoiceNo
+    required this.invoiceNo,
+    required this.status
 
 
 });

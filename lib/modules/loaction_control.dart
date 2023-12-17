@@ -99,7 +99,6 @@ class _LocationControl  extends State<LocationControl> {
                       }else if (isFaves == false){
                         print(" faves = false $staticCustomerId $locationId");
                         await customerAddFaves(widget.staticCustomerId, locationId);
-
                       }
                     },
                     icon: isFaves? const Icon(Icons.favorite, color: Colors.orange,):

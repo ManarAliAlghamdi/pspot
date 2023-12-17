@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../models/shared_methods.dart';
+import '../modules/fluid_nav_bar.dart';
 import 'Profile.dart';
-import 'homeScreen.dart';
 import 'signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -160,7 +160,7 @@ Future<void> _initCustomerId(String firstName, String password)async{
                                    Navigator.of(context)
                                        .pop();
                                  },
-                                 child: const Text("OK"),
+                                 child: const Text("OK", style: TextStyle(color: Colors.white),),
                                  style: ElevatedButton
                                      .styleFrom(
                                    primary: const Color(
@@ -176,7 +176,7 @@ Future<void> _initCustomerId(String firstName, String password)async{
                        }else if(customerId != 0){
                        Navigator.push(context, MaterialPageRoute(
                        builder: (context) =>
-                       HomeScreen(staticCustomerId: customerId,)
+                           FluidNavBar(staticCustomerId: customerId,)
                         )
                         );
                       }

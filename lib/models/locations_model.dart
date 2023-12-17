@@ -4,8 +4,8 @@ class LocationModel {
   final String locationName;
   final String locationOnMap;
   final String locationLogo;
-  final double locationCapacity;
-  final double locationAvailableSpots;
+  // final double locationCapacity;
+  // final double locationAvailableSpots;
   final int favesLocation;
 
   LocationModel(
@@ -14,8 +14,8 @@ class LocationModel {
         required this.locationName,
         required this.locationOnMap,
         required this.locationLogo,
-        required this.locationCapacity,
-        required this.locationAvailableSpots,
+        // required this.locationCapacity,
+        // required this.locationAvailableSpots,
         required this.favesLocation
       });
 }

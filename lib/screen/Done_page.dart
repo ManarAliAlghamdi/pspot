@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'homeScreen.dart';
+import '../modules/fluid_nav_bar.dart';
 
 class DonePage extends StatefulWidget {
   final int staticCustomerId;
@@ -40,7 +40,7 @@ class _DonePageState extends State<DonePage> {
               onPressed: () {
 
                   Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (context)=> HomeScreen(staticCustomerId: widget.staticCustomerId,)));
+                      builder: (context)=> FluidNavBar(staticCustomerId: widget.staticCustomerId,)));
 
               },
               style: ElevatedButton.styleFrom(

@@ -3,6 +3,8 @@ import '/models/shared_methods.dart';
 import '../modules/customer_invoice_details.dart';
 import '../modules/fluid_nav_bar.dart';
 import '../models/locations_model.dart';
+import 'HomePage.dart';
+import 'reservation_date_time.dart';
 import 'tickets_summary.dart';
 
 class ReserveParkingSpot extends StatefulWidget {
@@ -59,10 +61,21 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Book Your Tickets To \n${widget.locationName}',
-          style: const TextStyle(fontSize: 15),),
+        title: Text('Choose Your Spot at \n${widget.locationName}',
+          style: const TextStyle(fontSize: 15,  color: Colors.white),
+          ),
         backgroundColor: const Color(0xffC4DFDF),
-        leading: IconButton(onPressed: () {Navigator.of(context).pop();},
+        leading: IconButton(onPressed: () {
+          Navigator.pushReplacement(context, MaterialPageRoute(
+              builder: (context) =>
+                  ReservationDateTime(
+                      staticCustomerId: widget.staticCustomerId,
+                      locationId: widget.locationId,
+                      locationLogo: widget.locationLogo,
+                      locationName: widget.locationName)
+
+          ));
+        },
                             icon: Icon(Icons.arrow_back_ios),
         ),
 
@@ -73,7 +86,7 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
           child: SingleChildScrollView(
               child: Center(
                   child: SizedBox(
-                      height: 400,
+                      height: 500,
                       child: Column(
                           children: [
                             Visibility(
@@ -86,10 +99,9 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                             Visibility(
                               visible: showTable,
                               child: Container(
-
                                   height: MediaQuery
                                       .sizeOf(context)
-                                      .height - 208,
+                                      .height - 100,
                                   child: ListView.builder(
                                     itemCount: spotsList.length,
                                     scrollDirection: Axis.vertical,
@@ -301,31 +313,13 @@ class _ReserveParkingSpot extends State<ReserveParkingSpot> {
                                   )
                               ),
                             ),
-                            // Visibility(
-                            //     visible: showDetails,
-                            //     child: Container(
-                            //       height: 200,
-                            //       child: SingleChildScrollView(
-                            //         child: Column(
-                            //           children: [
-                            //             PaymentPageEdited(staticCustomerId: widget.staticCustomerId,
-                            //               locationLogo: widget.locationLogo, locationName: widget.locationName, ticketSpotInfo: spotsList[ticketsIndex], resDate: widget.dateRev, period: widget.period,
-                            //             )
-                            //           ],
-                            //         ),
-                            //
-                            //       ),
-                            //     )
-                            // )
+
                           ]
                       )
                   )
               )
           )
       ),
-      bottomNavigationBar: SizedBox(height: 70,
-          child: FluidNavBar(staticCustomerId: widget.staticCustomerId,)),
-
     );
   }
 }

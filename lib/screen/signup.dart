@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../models/shared_methods.dart';
 import 'Profile.dart';
-import 'homeScreen.dart';
 import 'login.dart';
 // import 'package:project3/screen/saved_places.dart';
 
@@ -249,16 +248,16 @@ Future<void> signUp(String firstName, String lastName, String email, String phon
                           if (customerId == -1){
                             AlertDialog alert = AlertDialog(
                               title: const Text(
-                                  "Sorry, The Number Already used"),
-                              content: const Text(
-                                  "Please Try Another Phone Number"),
+                                  "Sorry, The Account Already Exists"),
+                              // content: const Text(
+                              //     "Please Try Another Phone Number"),
                               actions: [
                                 Center(child: ElevatedButton(
                                     onPressed: () {
                                       Navigator.of(context)
                                           .pop();
                                     },
-                                    child: const Text("OK"),
+                                    child: const Text("OK", style: TextStyle(color: Colors.white),),
                                     style: ElevatedButton
                                         .styleFrom(
                                       primary: const Color(

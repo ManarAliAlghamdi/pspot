@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/shared_methods.dart';
 import '/modules/customer_invoice_details.dart';
-import '../models/customer_tickets_model.dart';
+import '../models/customer_invoice_model.dart';
 import '../modules/fluid_nav_bar.dart';
 
 
@@ -73,8 +73,9 @@ class _CustomerInvoiceState extends State<CustomerInvoice> {
         showInvoice = false;
         customerTicketsDetails = value;
       });
-      Navigator.push(context, MaterialPageRoute(
-          builder: (context) => CustomerInvoicesDetailsControl(invoiceDetailsInfo: customerTicketsDetails[0], staticCustomerId: widget.staticCustomerId,)));
+      Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context) => CustomerInvoicesDetailsControl(
+            invoiceDetailsInfo: customerTicketsDetails[0], staticCustomerId: widget.staticCustomerId,)));
 
     });
   }
@@ -103,8 +104,13 @@ class _CustomerInvoiceState extends State<CustomerInvoice> {
     staticCustomerId = widget.staticCustomerId;
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Parking Tickets", style: TextStyle(color: Colors.black),),
+          leading: IconButton(onPressed: () {  }, icon: Icon(Icons.add, size: 0,color: Color(0xffC4DFDF,)),),
+
+          title:  Padding(
+            padding: EdgeInsets.only(left: 30),
+            child: const Text(
+              "Parking Invoices", style: TextStyle(color: Colors.white),),
+          ),
           backgroundColor: Color(0xffC4DFDF),
         ),
         body: SingleChildScrollView(
@@ -149,11 +155,9 @@ class _CustomerInvoiceState extends State<CustomerInvoice> {
                                           int index) {
                                         return GestureDetector(
                                             onTap: (){
-                                              // showInvoice = false;
-                                              // showInvoiceDetails = true;
+
                                               showTicketsDetails(filteredCustomerTickets[index].invoiceNo);
-                                              invoiceNo = filteredCustomerTickets[index].invoiceNo;
-                                              x = invoiceNo.toString();
+
                                                },
                                             child: Container(
                                               child: Column(
@@ -200,7 +204,7 @@ class _CustomerInvoiceState extends State<CustomerInvoice> {
                                                                         style: TextStyle(color: Colors.black),
                                                                       ),
                                                                       TextSpan(
-                                                                        text: filteredCustomerTickets[index].ticketDateTime,
+                                                                        text: filteredCustomerTickets[index].ticketDateTime.substring(0,10),
                                                                         style: const TextStyle(color: Color(0xff93A7A7)),
                                                                       ),
                                                                     ],
@@ -248,110 +252,8 @@ class _CustomerInvoiceState extends State<CustomerInvoice> {
               ),
             )
         ),
-      bottomNavigationBar: SizedBox(height: 70,
-          child: FluidNavBar(staticCustomerId: widget.staticCustomerId,)),
+
     );
   }
 }
 
-
-//
-// if (customerTickets.isEmpty) {
-// return Scaffold(
-// body: Column(children: [
-// const SizedBox(height: 20),
-// ElevatedButton.icon(
-// icon: const Icon(Icons.access_alarm),
-// label: const Text("click here to Reserve your first spot!",
-// style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-// onPressed: () {
-// Navigator.pushReplacement(context, MaterialPageRoute(
-// builder: (context) =>
-// const BookYourSpot(title: 'Parking Spots | Locations List')
-// ));
-// },
-// style: ElevatedButton.styleFrom(
-// foregroundColor: Colors.black87,
-// backgroundColor: Colors.white,
-// padding: const EdgeInsets.all(20.0),
-// elevation: 15,
-// shadowColor: Colors.grey,
-// alignment: Alignment.centerLeft,
-// ),
-// ),
-// const SizedBox(height: 20),
-// const Text(
-// "My ParKing TicKet",
-// style: TextStyle(fontSize: 20, color: Colors.grey),
-// textAlign: TextAlign.left,
-// ),
-// const Expanded(
-// child: Center(
-// child: Text(
-// "no reserved spots yet..",
-// textAlign: TextAlign.center,
-// ),
-// ))
-// ]
-// ),
-// bottomNavigationBar: const SizedBox(height: 50, child: FluidNavBar())
-// );
-// }
-
-
-
-//   Visibility(
-//                         visible: showInvoiceDetails,
-//                         child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.start,
-//                             children: [
-//                               Container(
-//                                 width: double.infinity,
-//                                 height: 50,
-//                                 alignment: Alignment.centerLeft,
-//                                 decoration: const BoxDecoration(
-//                                     color: Color.fromRGBO(58, 57, 57, 1)),
-//                                 child: GestureDetector(
-//                                   onTap: () {
-//                                     setState(() {
-//                                       showInvoiceDetails = false;
-//                                       showProcessing = false;
-//                                       showInvoice = true;
-//                                     });
-//                                   },
-//                                   child: const Text(
-//                                     ' |Back to your Tickets',
-//                                     style: TextStyle(
-//                                         fontSize: 20,
-//                                         color: Colors.white,
-//                                         fontWeight: FontWeight.bold),
-//                                     textAlign: TextAlign.right,
-//
-//                                   ),
-//                                 ),
-//                               ),
-//
-//                               SingleChildScrollView(
-//                                 child: SizedBox(
-//                                     height: MediaQuery.sizeOf(context).height ,
-//                                     child: customerTicketsDetails.isEmpty
-//                                         ?  Text("$x") :
-//                                     SizedBox(
-//                                       height: MediaQuery.of(context).size.height,
-//                                       width: MediaQuery.of(context).size.width,
-//                                       child: ListView.builder(
-//                                           itemCount: customerTicketsDetails.length,
-//                                           itemBuilder: (BuildContext context, int index){
-//                                             return Column(
-//                                               children: [
-//                                                 CustomerInvoicesDetailsControl(invoiceDetailsInfo: customerTicketsDetails[0], staticCustomerId: widget.staticCustomerId,)
-//                                               ],
-//                                             );
-//
-//                                           }),
-//                                     )
-//                                 ),
-//
-//                               ),
-//                             ])
-//                     )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../modules/fluid_nav_bar.dart';
 import '/screen/problem_screen.dart';
 import '../models/locations_model.dart';
 import '../models/shared_methods.dart';
@@ -62,7 +63,7 @@ String resState = '';
       leading:
 
       IconButton(
-          onPressed:  (){  Navigator.push(context, MaterialPageRoute(
+          onPressed: (){  Navigator.push(context, MaterialPageRoute(
               builder: (context) => ReserveParkingSpot(
                 staticCustomerId: widget.staticCustomerId,
                 locationId: widget.locationID,
@@ -413,6 +414,8 @@ String resState = '';
           ),
         ],
       ),
+      // bottomNavigationBar: SizedBox(height: 70, child: FluidNavBar(staticCustomerId: staticCustomerId,)),
+
     );
   }
 }
